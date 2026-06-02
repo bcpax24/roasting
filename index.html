@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="UTF-8">
+<!-- saved from url=(0067)file:///C:/Users/%EB%B0%95%EB%B2%94%EC%B0%BD/Downloads/index_3.html -->
+<html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>원당커피공장 · 로스팅 프로파일</title>
 <style>
@@ -134,6 +134,36 @@
 
   .empty { text-align: center; padding: 40px 16px; color: var(--text3); font-size: 13px; }
 
+  .settings-card {
+    background: #fffbf5; border: 1px solid #e8d8b8;
+    border-radius: 10px; margin-bottom: 16px; overflow: hidden;
+  }
+  .settings-head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 11px 14px; border-bottom: 1px solid #ede0c8;
+  }
+  .settings-title { font-size: 13px; font-weight: 500; color: var(--accent2); font-family: var(--mono); letter-spacing: .04em; display: flex; align-items: center; gap: 6px; }
+  .settings-body { padding: 12px 14px; }
+  .settings-group { margin-bottom: 12px; }
+  .settings-group:last-child { margin-bottom: 0; }
+  .settings-group-label { font-size: 10px; color: var(--text3); font-family: var(--mono); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 6px; }
+  .settings-vals { display: flex; flex-wrap: wrap; gap: 8px; }
+  .settings-val { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 5px 10px; font-size: 12px; font-family: var(--mono); display: flex; gap: 6px; align-items: baseline; }
+  .settings-val .k { color: var(--text3); font-size: 10px; }
+  .settings-val .v { color: var(--text); font-weight: 500; }
+
+  .search-wrap { position: relative; margin-bottom: 14px; }
+  .search-input {
+    width: 100%; background: var(--surface); border: 1px solid var(--border2);
+    border-radius: 8px; color: var(--text); font-family: var(--sans);
+    font-size: 14px; padding: 10px 36px 10px 36px; outline: none;
+    transition: border-color .15s;
+  }
+  .search-input:focus { border-color: var(--accent); }
+  .search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text3); font-size: 14px; pointer-events: none; }
+  .search-clear { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); width: 24px; height: 24px; border: none; background: var(--surface2); border-radius: 50%; color: var(--text3); cursor: pointer; font-size: 13px; display: none; align-items: center; justify-content: center; }
+  .search-clear.show { display: flex; }
+
   .modal-bg {
     position: fixed; inset: 0; background: rgba(0,0,0,.4);
     display: flex; align-items: flex-end; justify-content: center;
@@ -202,8 +232,8 @@
 <div class="header">
   <div class="logo">원당커피공장<span> / 로스팅</span></div>
   <div class="header-right">
-    <div class="sync-dot" id="syncDot"></div>
-    <span class="sync-label" id="syncLabel">연결중</span>
+    <div class="sync-dot ok" id="syncDot"></div>
+    <span class="sync-label" id="syncLabel">동기화됨</span>
   </div>
 </div>
 
@@ -213,9 +243,58 @@
   <button class="tab" data-m="CBOB-5" onclick="switchMachine(this)">CBOB-5</button>
 </div>
 
-<div class="content" id="content">
-  <div class="loading-state">불러오는 중...</div>
-</div>
+<div class="content" id="content"><div class="settings-card">
+    <div class="settings-head">
+      <span class="settings-title">⚙ 기계 세팅값</span>
+      <button class="icon-btn" onclick="openEditSettings()" title="세팅 수정" style="color:var(--accent2)">✎</button>
+    </div>
+    <div class="settings-body"><div class="settings-group">
+      <div class="settings-group-label">설정값</div>
+      <div class="settings-vals"><div class="settings-val"><span class="k">DRUM SPEED</span><span class="v">—</span></div><div class="settings-val"><span class="k">AIR FLOW</span><span class="v">—</span></div></div>
+    </div><div class="settings-group">
+      <div class="settings-group-label">투입온도</div>
+      <div class="settings-vals"><div class="settings-val"><span class="k">DRUM</span><span class="v">—</span></div><div class="settings-val"><span class="k">AIR</span><span class="v">—</span></div><div class="settings-val"><span class="k">CYCLONE</span><span class="v">—</span></div></div>
+    </div><div class="settings-group">
+      <div class="settings-group-label">화력</div>
+      <div class="settings-vals"><div class="settings-val"><span class="k">HEAT</span><span class="v">—</span></div></div>
+    </div><div class="settings-group">
+      <div class="settings-group-label">예열</div>
+      <div class="settings-vals"><div class="settings-val"><span class="k">HEAT</span><span class="v">—</span></div></div>
+    </div></div>
+  </div><div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input class="search-input" id="searchInput" placeholder="품목 검색 (블렌드, 싱글 등)" value="" oninput="onSearch(this.value)">
+      <button class="search-clear " onclick="clearSearch()">✕</button>
+    </div><div class="item-card">
+    <div class="item-head">
+      <span class="item-name">🔴다크레귤러블렌드</span>
+      <div class="item-btns">
+        <button class="icon-btn" onclick="openAddLog(&#39;i1780376403989&#39;)" title="배치 추가">＋</button>
+        <button class="icon-btn" onclick="openEditItem(&#39;i1780376403989&#39;)" title="수정">✎</button>
+        <button class="icon-btn" onclick="confirmDeleteItem(&#39;i1780376403989&#39;)" title="삭제">✕</button>
+      </div>
+    </div>
+    <div class="log-table"><div class="log-thead">
+    <span>1차크랙</span><span>배출</span><span>DTR</span><span style="text-align:right">무게/날짜</span>
+  </div><div class="log-row" onclick="openEditLog(&#39;i1780376403989&#39;,&#39;l1780379770477&#39;)">
+      <span class="log-val">182</span>
+      <span class="log-val">—</span>
+      <span class="log-dtr">—</span>
+      <div class="log-meta">
+        
+        <span class="log-date">06/02</span>
+      </div>
+    </div><div class="log-row" onclick="openEditLog(&#39;i1780376403989&#39;,&#39;l1780379993859&#39;)">
+      <span class="log-val">182 16:55</span>
+      <span class="log-val">197 20:20</span>
+      <span class="log-dtr">3:15<span class="flag flag-r">R</span></span>
+      <div class="log-meta">
+        <span class="log-weight">57.84kg</span>
+        <span class="log-date">06/02</span>
+      </div>
+    </div></div>
+    
+  </div><button class="add-item-btn" onclick="openAddItem()">＋ 품목 추가</button></div>
 
 <div class="modal-bg" id="modalBg" onclick="bgClose(event)">
   <div class="modal">
@@ -234,7 +313,8 @@ import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/fireba
 import { getDatabase, ref, onValue, set, remove } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';
 
 const FB_URL_KEY = 'wondag_fb_url';
-let DB_URL = localStorage.getItem(FB_URL_KEY) || '';
+const DEFAULT_FB_URL = 'https://ull-roasting-default-rtdb.firebaseio.com/';
+let DB_URL = localStorage.getItem(FB_URL_KEY) || DEFAULT_FB_URL;
 
 let db = null;
 let unsubscribe = null;
@@ -273,6 +353,18 @@ function startSync() {
     render();
     setSyncState('ok', '동기화됨');
   }, () => { setSyncState('err', '오류'); });
+
+  const setRef = ref(db, 'settings');
+  onValue(setRef, snap => {
+    const data = snap.val();
+    machineSettings = { 'CBOB-120': {}, 'CBOB-30': {}, 'CBOB-5': {} };
+    if (data) {
+      ['CBOB-120','CBOB-30','CBOB-5'].forEach(m => {
+        if (data[m]) machineSettings[m] = data[m];
+      });
+    }
+    render();
+  });
 }
 
 function setSyncState(s, label) {
@@ -291,13 +383,97 @@ async function dbDelete(machine, itemId) {
   await remove(ref(db, `profiles/${machine}/${itemId}`));
 }
 
+const SETTINGS_SCHEMA = {
+  'CBOB-120': {
+    설정값: ['DRUM SPEED', 'AIR FLOW'],
+    투입온도: ['DRUM', 'AIR', 'CYCLONE'],
+    화력: ['HEAT'],
+    예열: ['HEAT'],
+  },
+  'CBOB-30': {
+    설정값: ['DRUM SPEED', 'AIR FLOW'],
+    투입온도: ['DRUM', 'AIR'],
+    화력: ['HEAT'],
+    예열: ['HEAT'],
+  },
+  'CBOB-5': {
+    설정값: ['DRUM SPEED', 'AIR FLOW'],
+    투입온도: ['DRUM', 'AIR'],
+    화력: ['HEAT'],
+    예열: ['HEAT'],
+  },
+};
+let machineSettings = { 'CBOB-120': {}, 'CBOB-30': {}, 'CBOB-5': {} };
+let searchQuery = '';
+
+async function dbSaveSettings(machine, vals) {
+  if (!db) return;
+  await set(ref(db, `settings/${machine}`), vals);
+}
+
 function render() {
   const el = document.getElementById('content');
-  const items = state[curMachine] || [];
+  const allItems = state[curMachine] || [];
   if (!DB_URL) { el.innerHTML = configBanner(); return; }
-  let html = items.length ? items.map(renderItem).join('') : '<div class="empty">📋 품목을 추가해주세요</div>';
+
+  const q = searchQuery.trim().toLowerCase();
+  const items = q ? allItems.filter(i => (i.name || '').toLowerCase().includes(q)) : allItems;
+
+  let html = renderSettings();
+  if (allItems.length > 0) {
+    html += `<div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input class="search-input" id="searchInput" placeholder="품목 검색 (블렌드, 싱글 등)" value="${searchQuery}" oninput="onSearch(this.value)" />
+      <button class="search-clear ${searchQuery ? 'show' : ''}" onclick="clearSearch()">✕</button>
+    </div>`;
+  }
+
+  if (!allItems.length) {
+    html += '<div class="empty">📋 품목을 추가해주세요</div>';
+  } else if (!items.length) {
+    html += `<div class="empty">"${searchQuery}" 검색 결과가 없습니다</div>`;
+  } else {
+    html += items.map(renderItem).join('');
+  }
   html += `<button class="add-item-btn" onclick="openAddItem()">＋ 품목 추가</button>`;
   el.innerHTML = html;
+
+  if (searchQuery) {
+    const si = document.getElementById('searchInput');
+    if (si) { si.focus(); si.setSelectionRange(si.value.length, si.value.length); }
+  }
+}
+
+window.onSearch = function(v) {
+  searchQuery = v;
+  render();
+};
+window.clearSearch = function() {
+  searchQuery = '';
+  render();
+};
+
+function renderSettings() {
+  const schema = SETTINGS_SCHEMA[curMachine];
+  const vals = machineSettings[curMachine] || {};
+  const groups = Object.entries(schema).map(([group, keys]) => {
+    const valHtml = keys.map(k => {
+      const v = (vals[group] && vals[group][k]) ? vals[group][k] : '—';
+      return `<div class="settings-val"><span class="k">${k}</span><span class="v">${v}</span></div>`;
+    }).join('');
+    return `<div class="settings-group">
+      <div class="settings-group-label">${group}</div>
+      <div class="settings-vals">${valHtml}</div>
+    </div>`;
+  }).join('');
+
+  return `<div class="settings-card">
+    <div class="settings-head">
+      <span class="settings-title">⚙ 기계 세팅값</span>
+      <button class="icon-btn" onclick="openEditSettings()" title="세팅 수정" style="color:var(--accent2)">✎</button>
+    </div>
+    <div class="settings-body">${groups}</div>
+  </div>`;
 }
 
 function configBanner() {
@@ -318,6 +494,47 @@ function flagClass(f) {
   if (f === '★') return 'flag-best';
   return '';
 }
+
+window.openEditSettings = function() {
+  const schema = SETTINGS_SCHEMA[curMachine];
+  const vals = machineSettings[curMachine] || {};
+  document.getElementById('modalTitle').textContent = curMachine + ' · 세팅 수정';
+  const groups = Object.entries(schema).map(([group, keys]) => {
+    const inputs = keys.map(k => {
+      const v = (vals[group] && vals[group][k]) ? vals[group][k] : '';
+      const safeId = 'set-' + group + '-' + k.replace(/\s/g, '_');
+      return `<div>
+        <label class="form-label" style="margin-bottom:4px">${k}</label>
+        <input class="form-input" id="${safeId}" value="${v}" autocomplete="off" />
+      </div>`;
+    }).join('');
+    const cols = keys.length >= 3 ? 'form-row3' : 'form-row2';
+    return `<div class="form-group">
+      <label class="form-label" style="color:var(--accent2)">${group}</label>
+      <div class="${cols}">${inputs}</div>
+    </div>`;
+  }).join('');
+  document.getElementById('modalBody').innerHTML = groups;
+  document.getElementById('modalFooter').innerHTML = `
+    <button class="btn-cancel" onclick="closeModal()">취소</button>
+    <button class="btn-save" onclick="saveSettings()">저장</button>`;
+  showModal();
+};
+
+window.saveSettings = async function() {
+  const schema = SETTINGS_SCHEMA[curMachine];
+  const out = {};
+  Object.entries(schema).forEach(([group, keys]) => {
+    out[group] = {};
+    keys.forEach(k => {
+      const safeId = 'set-' + group + '-' + k.replace(/\s/g, '_');
+      const v = document.getElementById(safeId).value.trim();
+      if (v) out[group][k] = v;
+    });
+  });
+  await dbSaveSettings(curMachine, out);
+  closeModal();
+};
 
 function renderItem(item) {
   const logs = item.logs ? Object.entries(item.logs).map(([id, v]) => ({ id, ...v })).sort((a, b) => (a.date || '').localeCompare(b.date || '')) : [];
@@ -360,7 +577,6 @@ function renderItem(item) {
 }
 
 window.openAddItem = function() {
-  editingItemId = null;
   document.getElementById('modalTitle').textContent = '품목 추가';
   document.getElementById('modalBody').innerHTML = `
     <div class="form-group">
@@ -565,6 +781,7 @@ function findItem(id) {
 
 window.switchMachine = function(el) {
   curMachine = el.dataset.m;
+  searchQuery = '';
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   el.classList.add('active');
   render();
@@ -587,5 +804,6 @@ window.bgClose = function(e) {
 
 if (DB_URL) { initFirebase(DB_URL); } else { render(); }
 </script>
-</body>
-</html>
+
+
+</body></html>
