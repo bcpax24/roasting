@@ -1,25 +1,26 @@
 <!DOCTYPE html>
-<!-- saved from url=(0065)file:///C:/Users/%EB%B0%95%EB%B2%94%EC%B0%BD/Downloads/index.html -->
-<html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>index.html</title>
+<title>원당커피공장 · 로스팅 프로파일</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@400;500;700&display=swap');
 
   :root {
-    --bg: #0f0e0c;
-    --surface: #1a1916;
-    --surface2: #222018;
-    --border: #2e2c28;
-    --border2: #3d3b35;
-    --text: #e8e4dc;
-    --text2: #8a8680;
-    --text3: #5a5852;
-    --accent: #c8842a;
-    --accent2: #a06820;
-    --red: #c84040;
-    --green: #4a9464;
+    --bg: #f7f5f2;
+    --surface: #ffffff;
+    --surface2: #f0ede8;
+    --border: #e2ddd6;
+    --border2: #ccc8c0;
+    --text: #1a1814;
+    --text2: #6b6760;
+    --text3: #a8a49e;
+    --accent: #b87020;
+    --accent2: #8f5518;
+    --red: #c03030;
+    --green: #2e7d50;
+    --blue: #2060a8;
     --mono: 'DM Mono', monospace;
     --sans: 'Noto Sans KR', sans-serif;
   }
@@ -27,10 +28,9 @@
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
   body { background: var(--bg); color: var(--text); font-family: var(--sans); min-height: 100vh; }
 
-  /* Header */
   .header {
     position: sticky; top: 0; z-index: 50;
-    background: var(--bg);
+    background: var(--surface);
     border-bottom: 1px solid var(--border);
     padding: 14px 16px 12px;
     display: flex; align-items: center; justify-content: space-between;
@@ -43,12 +43,11 @@
   .sync-dot.err { background: var(--red); }
   .sync-label { font-size: 11px; color: var(--text3); font-family: var(--mono); }
 
-  /* Machine tabs */
   .tabs {
-    display: flex; gap: 0;
+    display: flex;
     border-bottom: 1px solid var(--border);
     padding: 0 16px;
-    background: var(--bg);
+    background: var(--surface);
     position: sticky; top: 49px; z-index: 40;
   }
   .tab {
@@ -59,10 +58,8 @@
   }
   .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
 
-  /* Content */
   .content { padding: 16px; max-width: 500px; margin: 0 auto; padding-bottom: 80px; }
 
-  /* Item card */
   .item-card {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -86,7 +83,6 @@
   .icon-btn:hover { background: var(--surface2); color: var(--text); }
   .icon-btn:active { transform: scale(.93); }
 
-  /* Log table */
   .log-table { width: 100%; }
   .log-thead { display: grid; grid-template-columns: 90px 90px 52px 1fr; gap: 0; padding: 7px 14px 5px; }
   .log-thead span { font-size: 10px; color: var(--text3); font-family: var(--mono); letter-spacing: .06em; text-transform: uppercase; }
@@ -96,7 +92,7 @@
     display: grid; grid-template-columns: 90px 90px 52px 1fr;
     padding: 7px 14px; align-items: center;
     border-top: 1px solid var(--border);
-    transition: background .1s;
+    transition: background .1s; cursor: pointer;
   }
   .log-row:active { background: var(--surface2); }
   .log-val { font-family: var(--mono); font-size: 12px; color: var(--text); }
@@ -104,11 +100,12 @@
   .log-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
   .log-date { font-size: 10px; color: var(--text3); font-family: var(--mono); }
   .log-weight { font-size: 10px; color: var(--text2); font-family: var(--mono); }
-  .flag { display: inline-block; font-size: 9px; font-family: var(--mono); padding: 1px 4px; border-radius: 3px; margin-left: 3px; }
-  .flag-r { background: rgba(74,148,100,.15); color: var(--green); border: 1px solid rgba(74,148,100,.3); }
-  .flag-best { background: rgba(200,132,42,.15); color: var(--accent); border: 1px solid rgba(200,132,42,.3); }
 
-  /* Memo */
+  .flag { display: inline-block; font-size: 9px; font-family: var(--mono); padding: 1px 4px; border-radius: 3px; margin-left: 3px; font-weight: 500; }
+  .flag-d { background: rgba(192,48,48,.1); color: var(--red); border: 1px solid rgba(192,48,48,.25); }
+  .flag-r { background: rgba(46,125,80,.1); color: var(--green); border: 1px solid rgba(46,125,80,.25); }
+  .flag-best { background: rgba(184,112,32,.12); color: var(--accent); border: 1px solid rgba(184,112,32,.3); }
+
   .memo-row {
     padding: 7px 14px;
     border-top: 1px solid var(--border);
@@ -117,11 +114,7 @@
   }
   .memo-icon { color: var(--text3); font-size: 13px; flex-shrink: 0; margin-top: 1px; }
 
-  /* More btn */
-  .more-row {
-    padding: 8px 14px;
-    border-top: 1px solid var(--border);
-  }
+  .more-row { padding: 8px 14px; border-top: 1px solid var(--border); }
   .more-btn {
     font-size: 11px; color: var(--text3); background: none; border: none;
     cursor: pointer; font-family: var(--mono); letter-spacing: .04em;
@@ -129,7 +122,6 @@
   }
   .more-btn:hover { color: var(--text2); }
 
-  /* Add item btn */
   .add-item-btn {
     width: 100%; padding: 13px; border: 1px dashed var(--border2);
     border-radius: 10px; background: none; color: var(--text3);
@@ -140,32 +132,19 @@
   .add-item-btn:hover { border-color: var(--accent); color: var(--accent); }
   .add-item-btn:active { transform: scale(.98); }
 
-  /* FAB */
-  .fab {
-    position: fixed; bottom: 24px; right: 20px;
-    width: 50px; height: 50px; border-radius: 50%;
-    background: var(--accent); border: none; color: #000;
-    font-size: 24px; cursor: pointer; display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 4px 20px rgba(200,132,42,.35);
-    transition: transform .15s, box-shadow .15s; z-index: 30;
-  }
-  .fab:active { transform: scale(.93); box-shadow: 0 2px 10px rgba(200,132,42,.2); }
-
-  /* Empty */
   .empty { text-align: center; padding: 40px 16px; color: var(--text3); font-size: 13px; }
 
-  /* Modal */
   .modal-bg {
-    position: fixed; inset: 0; background: rgba(0,0,0,.7);
+    position: fixed; inset: 0; background: rgba(0,0,0,.4);
     display: flex; align-items: flex-end; justify-content: center;
     z-index: 100; backdrop-filter: blur(2px);
     opacity: 0; pointer-events: none; transition: opacity .2s;
   }
   .modal-bg.show { opacity: 1; pointer-events: auto; }
   .modal {
-    background: var(--surface); border: 1px solid var(--border2);
+    background: var(--surface); border: 1px solid var(--border);
     border-radius: 16px 16px 0 0;
-    padding: 0; width: 100%; max-width: 500px;
+    width: 100%; max-width: 500px;
     max-height: 92vh; display: flex; flex-direction: column;
     transform: translateY(20px); transition: transform .2s;
   }
@@ -176,7 +155,6 @@
   .modal-close { width: 28px; height: 28px; border-radius: 50%; background: var(--surface2); border: none; color: var(--text2); font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
   .modal-body { overflow-y: auto; padding: 16px 18px; flex: 1; }
 
-  /* Form */
   .form-group { margin-bottom: 14px; }
   .form-label { display: block; font-size: 11px; color: var(--text3); font-family: var(--mono); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 6px; }
   .form-input, .form-textarea, .form-select {
@@ -187,32 +165,30 @@
   }
   .form-input:focus, .form-textarea:focus, .form-select:focus { border-color: var(--accent); }
   .form-textarea { height: 72px; resize: vertical; font-family: var(--sans); }
-  .form-select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%235a5852' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px; }
+  .form-select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%23a8a49e' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px; }
   .form-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
   .form-row3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
 
   .modal-footer { padding: 14px 18px; border-top: 1px solid var(--border); display: flex; gap: 10px; }
   .btn-cancel { padding: 11px 18px; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; color: var(--text2); font-size: 14px; cursor: pointer; font-family: var(--sans); }
-  .btn-save { flex: 1; padding: 11px; background: var(--accent); border: none; border-radius: 8px; color: #000; font-size: 14px; font-weight: 700; cursor: pointer; font-family: var(--sans); transition: background .15s; }
+  .btn-save { flex: 1; padding: 11px; background: var(--accent); border: none; border-radius: 8px; color: #fff; font-size: 14px; font-weight: 700; cursor: pointer; font-family: var(--sans); transition: background .15s; }
   .btn-save:active { background: var(--accent2); }
-  .btn-delete { padding: 11px 14px; background: rgba(200,64,64,.12); border: 1px solid rgba(200,64,64,.25); border-radius: 8px; color: var(--red); font-size: 14px; cursor: pointer; font-family: var(--sans); }
+  .btn-delete { padding: 11px 14px; background: rgba(192,48,48,.08); border: 1px solid rgba(192,48,48,.2); border-radius: 8px; color: var(--red); font-size: 14px; cursor: pointer; font-family: var(--sans); }
 
-  /* Config banner */
-  .config-banner { background: rgba(200,132,42,.08); border: 1px solid rgba(200,132,42,.25); border-radius: 10px; padding: 14px; margin-bottom: 16px; }
+  .config-banner { background: #fffbf5; border: 1px solid #e8d8b8; border-radius: 10px; padding: 14px; margin-bottom: 16px; }
   .config-banner h3 { font-size: 13px; color: var(--accent); margin-bottom: 8px; font-family: var(--mono); }
   .config-banner p { font-size: 12px; color: var(--text2); line-height: 1.6; }
   .config-input-wrap { margin-top: 10px; display: flex; gap: 8px; }
-  .config-input { flex: 1; background: var(--bg); border: 1px solid var(--border2); border-radius: 6px; color: var(--text); font-family: var(--mono); font-size: 12px; padding: 8px 10px; outline: none; }
+  .config-input { flex: 1; background: var(--surface); border: 1px solid var(--border2); border-radius: 6px; color: var(--text); font-family: var(--mono); font-size: 12px; padding: 8px 10px; outline: none; }
   .config-input:focus { border-color: var(--accent); }
-  .config-btn { padding: 8px 14px; background: var(--accent); border: none; border-radius: 6px; color: #000; font-size: 12px; font-weight: 700; cursor: pointer; white-space: nowrap; }
+  .config-btn { padding: 8px 14px; background: var(--accent); border: none; border-radius: 6px; color: #fff; font-size: 12px; font-weight: 700; cursor: pointer; white-space: nowrap; }
 
-  /* Detail list */
   .detail-item { padding: 12px 0; border-bottom: 1px solid var(--border); }
   .detail-item:last-child { border-bottom: none; }
   .detail-item-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
   .detail-date { font-size: 11px; color: var(--text3); font-family: var(--mono); }
   .detail-vals { display: flex; gap: 12px; flex-wrap: wrap; }
-  .detail-val { font-size: 12px; font-family: var(--mono); }
+  .detail-val { font-size: 12px; font-family: var(--mono); color: var(--text2); }
   .detail-val b { color: var(--accent); }
   .detail-memo { font-size: 12px; color: var(--text2); margin-top: 5px; font-style: italic; }
   .detail-btns { display: flex; gap: 4px; }
@@ -226,8 +202,8 @@
 <div class="header">
   <div class="logo">원당커피공장<span> / 로스팅</span></div>
   <div class="header-right">
-    <div class="sync-dot ok" id="syncDot"></div>
-    <span class="sync-label" id="syncLabel">동기화됨</span>
+    <div class="sync-dot" id="syncDot"></div>
+    <span class="sync-label" id="syncLabel">연결중</span>
   </div>
 </div>
 
@@ -237,48 +213,26 @@
   <button class="tab" data-m="CBOB-5" onclick="switchMachine(this)">CBOB-5</button>
 </div>
 
-<div class="content" id="content"><div class="item-card">
-    <div class="item-head">
-      <span class="item-name">🔴다크레귤러블렌드</span>
-      <div class="item-btns">
-        <button class="icon-btn" onclick="openAddLog(&#39;i1780376403989&#39;)" title="배치 추가">＋</button>
-        <button class="icon-btn" onclick="openEditItem(&#39;i1780376403989&#39;)" title="수정">✎</button>
-        <button class="icon-btn" onclick="confirmDeleteItem(&#39;i1780376403989&#39;)" title="삭제" style="color:var(--text3)">✕</button>
-      </div>
-    </div>
-    <div class="log-table"><div class="log-thead">
-    <span>1차크랙</span><span>배출</span><span>DTR</span><span style="text-align:right">수율/날짜</span>
-  </div></div>
-    
-  </div><button class="add-item-btn" onclick="openAddItem()">＋ 품목 추가</button></div>
+<div class="content" id="content">
+  <div class="loading-state">불러오는 중...</div>
+</div>
 
-<!-- Modal -->
 <div class="modal-bg" id="modalBg" onclick="bgClose(event)">
   <div class="modal">
     <div class="modal-handle"></div>
     <div class="modal-head">
-      <span class="modal-title" id="modalTitle">품목 추가</span>
+      <span class="modal-title" id="modalTitle"></span>
       <button class="modal-close" onclick="closeModal()">✕</button>
     </div>
-    <div class="modal-body" id="modalBody">
-    <div class="form-group">
-      <label class="form-label">품목명</label>
-      <input class="form-input" id="fi-name" placeholder="예: 🔴 다크블렌드" autocomplete="off">
-    </div></div>
-    <div class="modal-footer" id="modalFooter">
-    <button class="btn-cancel" onclick="closeModal()">취소</button>
-    <button class="btn-save" onclick="saveItem()">저장</button></div>
+    <div class="modal-body" id="modalBody"></div>
+    <div class="modal-footer" id="modalFooter"></div>
   </div>
 </div>
 
-<!-- Firebase SDK -->
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
-import { getDatabase, ref, onValue, set, push, remove, update } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';
+import { getDatabase, ref, onValue, set, remove } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';
 
-// ============================================================
-//  🔧 Firebase 설정 — DB URL만 바꾸면 됩니다
-// ============================================================
 const FB_URL_KEY = 'wondag_fb_url';
 let DB_URL = localStorage.getItem(FB_URL_KEY) || '';
 
@@ -290,7 +244,6 @@ let editingItemId = null;
 let editingLogId = null;
 let detailItemId = null;
 
-// ─── Firebase 초기화 ───────────────────────────────────────
 function initFirebase(url) {
   DB_URL = url;
   localStorage.setItem(FB_URL_KEY, url);
@@ -319,9 +272,7 @@ function startSync() {
     }
     render();
     setSyncState('ok', '동기화됨');
-  }, err => {
-    setSyncState('err', '오류');
-  });
+  }, () => { setSyncState('err', '오류'); });
 }
 
 function setSyncState(s, label) {
@@ -330,7 +281,6 @@ function setSyncState(s, label) {
   document.getElementById('syncLabel').textContent = label;
 }
 
-// ─── DB 쓰기 ──────────────────────────────────────────────
 async function dbSave(machine, item) {
   if (!db) return;
   const { id, ...data } = item;
@@ -341,22 +291,11 @@ async function dbDelete(machine, itemId) {
   await remove(ref(db, `profiles/${machine}/${itemId}`));
 }
 
-// ─── 렌더 ─────────────────────────────────────────────────
 function render() {
   const el = document.getElementById('content');
   const items = state[curMachine] || [];
-
-  if (!DB_URL) {
-    el.innerHTML = configBanner();
-    return;
-  }
-
-  let html = '';
-  if (!items.length) {
-    html = '<div class="empty">📋 품목을 추가해주세요</div>';
-  } else {
-    html = items.map(renderItem).join('');
-  }
+  if (!DB_URL) { el.innerHTML = configBanner(); return; }
+  let html = items.length ? items.map(renderItem).join('') : '<div class="empty">📋 품목을 추가해주세요</div>';
   html += `<button class="add-item-btn" onclick="openAddItem()">＋ 품목 추가</button>`;
   el.innerHTML = html;
 }
@@ -370,7 +309,14 @@ function configBanner() {
       <button class="config-btn" onclick="connectFirebase()">연결</button>
     </div>
   </div>
-  <div class="empty" style="padding:20px 0;color:var(--text3);font-size:12px">Firebase URL을 입력한 후 품목을 추가하세요</div>`;
+  <div class="empty" style="padding:20px 0;font-size:12px">Firebase URL을 입력한 후 품목을 추가하세요</div>`;
+}
+
+function flagClass(f) {
+  if (f === 'D') return 'flag-d';
+  if (f === 'R') return 'flag-r';
+  if (f === '★') return 'flag-best';
+  return '';
 }
 
 function renderItem(item) {
@@ -380,25 +326,23 @@ function renderItem(item) {
   const memos = logs.filter(l => l.memo).slice(-2);
 
   const thead = `<div class="log-thead">
-    <span>1차크랙</span><span>배출</span><span>DTR</span><span style="text-align:right">수율/날짜</span>
+    <span>1차크랙</span><span>배출</span><span>DTR</span><span style="text-align:right">무게/날짜</span>
   </div>`;
 
   const rows = show.map(l => {
-    const flagClass = l.flag === 'R' ? 'flag-r' : l.flag === '★' ? 'flag-best' : '';
-    const flagHtml = l.flag ? `<span class="flag ${flagClass}">${l.flag}</span>` : '';
+    const fHtml = l.flag ? `<span class="flag ${flagClass(l.flag)}">${l.flag}</span>` : '';
     return `<div class="log-row" onclick="openEditLog('${item.id}','${l.id}')">
       <span class="log-val">${l.crack || '—'}</span>
       <span class="log-val">${l.discharge || '—'}</span>
-      <span class="log-dtr">${l.dtr || '—'}${flagHtml}</span>
+      <span class="log-dtr">${l.dtr || '—'}${fHtml}</span>
       <div class="log-meta">
-        ${l.weight ? `<span class="log-weight">${l.weight}%</span>` : ''}
+        ${l.weight ? `<span class="log-weight">${l.weight}kg</span>` : ''}
         <span class="log-date">${l.date ? l.date.slice(5).replace('-', '/') : '—'}</span>
       </div>
     </div>`;
   }).join('');
 
   const memoHtml = memos.map(l => `<div class="memo-row"><span class="memo-icon">✎</span>${l.memo}</div>`).join('');
-
   const moreHtml = hasMore ? `<div class="more-row"><button class="more-btn" onclick="openDetail('${item.id}')">전체 ${logs.length}회 기록 보기</button></div>` : '';
 
   return `<div class="item-card">
@@ -407,7 +351,7 @@ function renderItem(item) {
       <div class="item-btns">
         <button class="icon-btn" onclick="openAddLog('${item.id}')" title="배치 추가">＋</button>
         <button class="icon-btn" onclick="openEditItem('${item.id}')" title="수정">✎</button>
-        <button class="icon-btn" onclick="confirmDeleteItem('${item.id}')" title="삭제" style="color:var(--text3)">✕</button>
+        <button class="icon-btn" onclick="confirmDeleteItem('${item.id}')" title="삭제">✕</button>
       </div>
     </div>
     <div class="log-table">${thead}${rows}</div>
@@ -415,7 +359,6 @@ function renderItem(item) {
   </div>`;
 }
 
-// ─── 품목 ─────────────────────────────────────────────────
 window.openAddItem = function() {
   editingItemId = null;
   document.getElementById('modalTitle').textContent = '품목 추가';
@@ -449,7 +392,6 @@ window.openEditItem = function(id) {
 window.saveItem = async function() {
   const name = document.getElementById('fi-name').value.trim();
   if (!name) return;
-  const items = state[curMachine] || [];
   if (editingItemId) {
     const item = findItem(editingItemId);
     item.name = name;
@@ -476,7 +418,6 @@ window.doDeleteItem = async function(id) {
   closeModal();
 };
 
-// ─── 배치 로그 ─────────────────────────────────────────────
 function logFormHtml(l = {}) {
   const crack = l.crack || '';
   const crackTemp = crack.split(' ')[0] || '';
@@ -510,13 +451,14 @@ function logFormHtml(l = {}) {
           <input class="form-input" id="fl-dtr" placeholder="3:15" value="${l.dtr || ''}" />
         </div>
         <div>
-          <label class="form-label">수율%</label>
+          <label class="form-label">무게 (kg)</label>
           <input class="form-input" id="fl-weight" type="number" step="0.01" placeholder="57.84" value="${l.weight || ''}" />
         </div>
         <div>
           <label class="form-label">플래그</label>
           <select class="form-select" id="fl-flag">
             <option value="" ${!l.flag ? 'selected' : ''}>없음</option>
+            <option value="D" ${l.flag === 'D' ? 'selected' : ''}>D</option>
             <option value="R" ${l.flag === 'R' ? 'selected' : ''}>R</option>
             <option value="★" ${l.flag === '★' ? 'selected' : ''}>★</option>
           </select>
@@ -572,9 +514,7 @@ window.openEditLog = function(itemId, logId) {
 
 window.saveLog = async function() {
   const data = getLogFormData();
-  const item = findItem(editingItemId);
   const logId = editingLogId || ('l' + Date.now());
-  if (!item.logs) item.logs = {};
   await set(ref(db, `profiles/${curMachine}/${editingItemId}/logs/${logId}`), data);
   closeModal();
 };
@@ -585,17 +525,15 @@ window.doDeleteLog = async function() {
   closeModal();
 };
 
-// ─── 전체 이력 ─────────────────────────────────────────────
 window.openDetail = function(itemId) {
   detailItemId = itemId;
   const item = findItem(itemId);
   const logs = item.logs ? Object.entries(item.logs).map(([id, v]) => ({ id, ...v })).sort((a, b) => (b.date || '').localeCompare(a.date || '')) : [];
   const rows = logs.map(l => {
-    const flagClass = l.flag === 'R' ? 'flag-r' : l.flag === '★' ? 'flag-best' : '';
-    const flagHtml = l.flag ? `<span class="flag ${flagClass}" style="margin-left:0">${l.flag}</span>` : '';
+    const fHtml = l.flag ? `<span class="flag ${flagClass(l.flag)}" style="margin-left:0">${l.flag}</span>` : '';
     return `<div class="detail-item">
       <div class="detail-item-head">
-        <span class="detail-date">${l.date || '—'} ${flagHtml}</span>
+        <span class="detail-date">${l.date || '—'} ${fHtml}</span>
         <div class="detail-btns">
           <button class="detail-edit-btn" onclick="openEditLog('${itemId}','${l.id}')">수정</button>
         </div>
@@ -604,7 +542,7 @@ window.openDetail = function(itemId) {
         <span class="detail-val">1크 <b>${l.crack || '—'}</b></span>
         <span class="detail-val">배출 <b>${l.discharge || '—'}</b></span>
         <span class="detail-val">DTR <b>${l.dtr || '—'}</b></span>
-        ${l.weight ? `<span class="detail-val">수율 <b>${l.weight}%</b></span>` : ''}
+        ${l.weight ? `<span class="detail-val">무게 <b>${l.weight}kg</b></span>` : ''}
       </div>
       ${l.memo ? `<div class="detail-memo">✎ ${l.memo}</div>` : ''}
     </div>`;
@@ -618,9 +556,8 @@ window.openDetail = function(itemId) {
   showModal();
 };
 
-// ─── 유틸 ─────────────────────────────────────────────────
 function findItem(id) {
-  for (const m of ['CBOB-120', 'CBOB-30', 'CBOB-5']) {
+  for (const m of ['CBOB-120','CBOB-30','CBOB-5']) {
     const f = (state[m] || []).find(i => i.id === id);
     if (f) return f;
   }
@@ -639,9 +576,7 @@ window.connectFirebase = function() {
   initFirebase(url);
 };
 
-function showModal() {
-  document.getElementById('modalBg').classList.add('show');
-}
+function showModal() { document.getElementById('modalBg').classList.add('show'); }
 window.closeModal = function() {
   document.getElementById('modalBg').classList.remove('show');
   editingItemId = null; editingLogId = null;
@@ -650,13 +585,7 @@ window.bgClose = function(e) {
   if (e.target === document.getElementById('modalBg')) closeModal();
 };
 
-// 앱 시작
-if (DB_URL) {
-  initFirebase(DB_URL);
-} else {
-  render();
-}
+if (DB_URL) { initFirebase(DB_URL); } else { render(); }
 </script>
-
-
-</body></html>
+</body>
+</html>
