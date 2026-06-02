@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<!-- saved from url=(0065)file:///C:/Users/%EB%B0%95%EB%B2%94%EC%B0%BD/Downloads/index.html -->
+<html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>원당커피공장 · 로스팅 프로파일</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@400;500;700&display=swap');
+
+  :root {
+    --bg: #0f0e0c;
+    --surface: #1a1916;
+    --surface2: #222018;
+    --border: #2e2c28;
+    --border2: #3d3b35;
+    --text: #e8e4dc;
+    --text2: #8a8680;
+    --text3: #5a5852;
+    --accent: #c8842a;
+    --accent2: #a06820;
+    --red: #c84040;
+    --green: #4a9464;
+    --mono: 'DM Mono', monospace;
+    --sans: 'Noto Sans KR', sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  body { background: var(--bg); color: var(--text); font-family: var(--sans); min-height: 100vh; }
+
+  /* Header */
+  .header {
+    position: sticky; top: 0; z-index: 50;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 16px 12px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .logo { font-family: var(--mono); font-size: 13px; color: var(--accent); letter-spacing: .06em; }
+  .logo span { color: var(--text3); }
+  .header-right { display: flex; align-items: center; gap: 10px; }
+  .sync-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--text3); transition: background .3s; }
+  .sync-dot.ok { background: var(--green); }
+  .sync-dot.err { background: var(--red); }
+  .sync-label { font-size: 11px; color: var(--text3); font-family: var(--mono); }
+
+  /* Machine tabs */
+  .tabs {
+    display: flex; gap: 0;
+    border-bottom: 1px solid var(--border);
+    padding: 0 16px;
+    background: var(--bg);
+    position: sticky; top: 49px; z-index: 40;
+  }
+  .tab {
+    flex: 1; padding: 11px 0; font-size: 13px; font-family: var(--mono);
+    color: var(--text3); border: none; background: none; cursor: pointer;
+    border-bottom: 2px solid transparent; transition: all .15s; margin-bottom: -1px;
+    letter-spacing: .04em;
+  }
+  .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* Content */
+  .content { padding: 16px; max-width: 500px; margin: 0 auto; padding-bottom: 80px; }
+
+  /* Item card */
+  .item-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 12px;
+    overflow: hidden;
+  }
+  .item-head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 13px 14px 11px;
+    border-bottom: 1px solid var(--border);
+  }
+  .item-name { font-size: 15px; font-weight: 500; letter-spacing: -.01em; }
+  .item-btns { display: flex; gap: 2px; }
+  .icon-btn {
+    width: 32px; height: 32px; border-radius: 6px;
+    border: none; background: none; color: var(--text3);
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    font-size: 17px; transition: all .1s;
+  }
+  .icon-btn:hover { background: var(--surface2); color: var(--text); }
+  .icon-btn:active { transform: scale(.93); }
+
+  /* Log table */
+  .log-table { width: 100%; }
+  .log-thead { display: grid; grid-template-columns: 90px 90px 52px 1fr; gap: 0; padding: 7px 14px 5px; }
+  .log-thead span { font-size: 10px; color: var(--text3); font-family: var(--mono); letter-spacing: .06em; text-transform: uppercase; }
+  .log-thead span:last-child { text-align: right; }
+
+  .log-row {
+    display: grid; grid-template-columns: 90px 90px 52px 1fr;
+    padding: 7px 14px; align-items: center;
+    border-top: 1px solid var(--border);
+    transition: background .1s;
+  }
+  .log-row:active { background: var(--surface2); }
+  .log-val { font-family: var(--mono); font-size: 12px; color: var(--text); }
+  .log-dtr { font-family: var(--mono); font-size: 12px; color: var(--accent); font-weight: 500; }
+  .log-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
+  .log-date { font-size: 10px; color: var(--text3); font-family: var(--mono); }
+  .log-weight { font-size: 10px; color: var(--text2); font-family: var(--mono); }
+  .flag { display: inline-block; font-size: 9px; font-family: var(--mono); padding: 1px 4px; border-radius: 3px; margin-left: 3px; }
+  .flag-r { background: rgba(74,148,100,.15); color: var(--green); border: 1px solid rgba(74,148,100,.3); }
+  .flag-best { background: rgba(200,132,42,.15); color: var(--accent); border: 1px solid rgba(200,132,42,.3); }
+
+  /* Memo */
+  .memo-row {
+    padding: 7px 14px;
+    border-top: 1px solid var(--border);
+    font-size: 12px; color: var(--text2);
+    font-style: italic; display: flex; gap: 6px; align-items: flex-start;
+  }
+  .memo-icon { color: var(--text3); font-size: 13px; flex-shrink: 0; margin-top: 1px; }
+
+  /* More btn */
+  .more-row {
+    padding: 8px 14px;
+    border-top: 1px solid var(--border);
+  }
+  .more-btn {
+    font-size: 11px; color: var(--text3); background: none; border: none;
+    cursor: pointer; font-family: var(--mono); letter-spacing: .04em;
+    text-decoration: underline; padding: 0;
+  }
+  .more-btn:hover { color: var(--text2); }
+
+  /* Add item btn */
+  .add-item-btn {
+    width: 100%; padding: 13px; border: 1px dashed var(--border2);
+    border-radius: 10px; background: none; color: var(--text3);
+    font-size: 13px; cursor: pointer; font-family: var(--sans);
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+    transition: all .15s;
+  }
+  .add-item-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .add-item-btn:active { transform: scale(.98); }
+
+  /* FAB */
+  .fab {
+    position: fixed; bottom: 24px; right: 20px;
+    width: 50px; height: 50px; border-radius: 50%;
+    background: var(--accent); border: none; color: #000;
+    font-size: 24px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 20px rgba(200,132,42,.35);
+    transition: transform .15s, box-shadow .15s; z-index: 30;
+  }
+  .fab:active { transform: scale(.93); box-shadow: 0 2px 10px rgba(200,132,42,.2); }
+
+  /* Empty */
+  .empty { text-align: center; padding: 40px 16px; color: var(--text3); font-size: 13px; }
+
+  /* Modal */
+  .modal-bg {
+    position: fixed; inset: 0; background: rgba(0,0,0,.7);
+    display: flex; align-items: flex-end; justify-content: center;
+    z-index: 100; backdrop-filter: blur(2px);
+    opacity: 0; pointer-events: none; transition: opacity .2s;
+  }
+  .modal-bg.show { opacity: 1; pointer-events: auto; }
+  .modal {
+    background: var(--surface); border: 1px solid var(--border2);
+    border-radius: 16px 16px 0 0;
+    padding: 0; width: 100%; max-width: 500px;
+    max-height: 92vh; display: flex; flex-direction: column;
+    transform: translateY(20px); transition: transform .2s;
+  }
+  .modal-bg.show .modal { transform: translateY(0); }
+  .modal-handle { width: 36px; height: 4px; background: var(--border2); border-radius: 2px; margin: 12px auto 0; }
+  .modal-head { padding: 14px 18px 12px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+  .modal-title { font-size: 15px; font-weight: 500; }
+  .modal-close { width: 28px; height: 28px; border-radius: 50%; background: var(--surface2); border: none; color: var(--text2); font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+  .modal-body { overflow-y: auto; padding: 16px 18px; flex: 1; }
+
+  /* Form */
+  .form-group { margin-bottom: 14px; }
+  .form-label { display: block; font-size: 11px; color: var(--text3); font-family: var(--mono); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 6px; }
+  .form-input, .form-textarea, .form-select {
+    width: 100%; background: var(--bg); border: 1px solid var(--border2);
+    border-radius: 8px; color: var(--text); font-family: var(--mono);
+    font-size: 15px; padding: 10px 12px; outline: none;
+    transition: border-color .15s; -webkit-appearance: none;
+  }
+  .form-input:focus, .form-textarea:focus, .form-select:focus { border-color: var(--accent); }
+  .form-textarea { height: 72px; resize: vertical; font-family: var(--sans); }
+  .form-select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%235a5852' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px; }
+  .form-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .form-row3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+
+  .modal-footer { padding: 14px 18px; border-top: 1px solid var(--border); display: flex; gap: 10px; }
+  .btn-cancel { padding: 11px 18px; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; color: var(--text2); font-size: 14px; cursor: pointer; font-family: var(--sans); }
+  .btn-save { flex: 1; padding: 11px; background: var(--accent); border: none; border-radius: 8px; color: #000; font-size: 14px; font-weight: 700; cursor: pointer; font-family: var(--sans); transition: background .15s; }
+  .btn-save:active { background: var(--accent2); }
+  .btn-delete { padding: 11px 14px; background: rgba(200,64,64,.12); border: 1px solid rgba(200,64,64,.25); border-radius: 8px; color: var(--red); font-size: 14px; cursor: pointer; font-family: var(--sans); }
+
+  /* Config banner */
+  .config-banner { background: rgba(200,132,42,.08); border: 1px solid rgba(200,132,42,.25); border-radius: 10px; padding: 14px; margin-bottom: 16px; }
+  .config-banner h3 { font-size: 13px; color: var(--accent); margin-bottom: 8px; font-family: var(--mono); }
+  .config-banner p { font-size: 12px; color: var(--text2); line-height: 1.6; }
+  .config-input-wrap { margin-top: 10px; display: flex; gap: 8px; }
+  .config-input { flex: 1; background: var(--bg); border: 1px solid var(--border2); border-radius: 6px; color: var(--text); font-family: var(--mono); font-size: 12px; padding: 8px 10px; outline: none; }
+  .config-input:focus { border-color: var(--accent); }
+  .config-btn { padding: 8px 14px; background: var(--accent); border: none; border-radius: 6px; color: #000; font-size: 12px; font-weight: 700; cursor: pointer; white-space: nowrap; }
+
+  /* Detail list */
+  .detail-item { padding: 12px 0; border-bottom: 1px solid var(--border); }
+  .detail-item:last-child { border-bottom: none; }
+  .detail-item-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+  .detail-date { font-size: 11px; color: var(--text3); font-family: var(--mono); }
+  .detail-vals { display: flex; gap: 12px; flex-wrap: wrap; }
+  .detail-val { font-size: 12px; font-family: var(--mono); }
+  .detail-val b { color: var(--accent); }
+  .detail-memo { font-size: 12px; color: var(--text2); margin-top: 5px; font-style: italic; }
+  .detail-btns { display: flex; gap: 4px; }
+  .detail-edit-btn { font-size: 11px; color: var(--text3); background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 3px 8px; cursor: pointer; font-family: var(--mono); }
+
+  .loading-state { text-align: center; padding: 32px; color: var(--text3); font-family: var(--mono); font-size: 12px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo">원당커피공장<span> / 로스팅</span></div>
+  <div class="header-right">
+    <div class="sync-dot ok" id="syncDot"></div>
+    <span class="sync-label" id="syncLabel">동기화됨</span>
+  </div>
+</div>
+
+<div class="tabs">
+  <button class="tab active" data-m="CBOB-120" onclick="switchMachine(this)">CBOB-120</button>
+  <button class="tab" data-m="CBOB-30" onclick="switchMachine(this)">CBOB-30</button>
+  <button class="tab" data-m="CBOB-5" onclick="switchMachine(this)">CBOB-5</button>
+</div>
+
+<div class="content" id="content"><div class="item-card">
+    <div class="item-head">
+      <span class="item-name">🔴다크레귤러블렌드</span>
+      <div class="item-btns">
+        <button class="icon-btn" onclick="openAddLog(&#39;i1780376403989&#39;)" title="배치 추가">＋</button>
+        <button class="icon-btn" onclick="openEditItem(&#39;i1780376403989&#39;)" title="수정">✎</button>
+        <button class="icon-btn" onclick="confirmDeleteItem(&#39;i1780376403989&#39;)" title="삭제" style="color:var(--text3)">✕</button>
+      </div>
+    </div>
+    <div class="log-table"><div class="log-thead">
+    <span>1차크랙</span><span>배출</span><span>DTR</span><span style="text-align:right">수율/날짜</span>
+  </div></div>
+    
+  </div><button class="add-item-btn" onclick="openAddItem()">＋ 품목 추가</button></div>
+
+<!-- Modal -->
+<div class="modal-bg" id="modalBg" onclick="bgClose(event)">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <div class="modal-head">
+      <span class="modal-title" id="modalTitle">품목 추가</span>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body" id="modalBody">
+    <div class="form-group">
+      <label class="form-label">품목명</label>
+      <input class="form-input" id="fi-name" placeholder="예: 🔴 다크블렌드" autocomplete="off">
+    </div></div>
+    <div class="modal-footer" id="modalFooter">
+    <button class="btn-cancel" onclick="closeModal()">취소</button>
+    <button class="btn-save" onclick="saveItem()">저장</button></div>
+  </div>
+</div>
+
+<!-- Firebase SDK -->
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+import { getDatabase, ref, onValue, set, push, remove, update } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';
+
+// ============================================================
+//  🔧 Firebase 설정 — DB URL만 바꾸면 됩니다
+// ============================================================
+const FB_URL_KEY = 'wondag_fb_url';
+let DB_URL = localStorage.getItem(FB_URL_KEY) || '';
+
+let db = null;
+let unsubscribe = null;
+let state = { 'CBOB-120': [], 'CBOB-30': [], 'CBOB-5': [] };
+let curMachine = 'CBOB-120';
+let editingItemId = null;
+let editingLogId = null;
+let detailItemId = null;
+
+// ─── Firebase 초기화 ───────────────────────────────────────
+function initFirebase(url) {
+  DB_URL = url;
+  localStorage.setItem(FB_URL_KEY, url);
+  try {
+    const app = initializeApp({ databaseURL: url }, 'wondag-' + Date.now());
+    db = getDatabase(app);
+    startSync();
+  } catch(e) {
+    setSyncState('err', '연결 실패');
+  }
+}
+
+function startSync() {
+  if (!db) return;
+  setSyncState('', '연결중...');
+  const dbRef = ref(db, 'profiles');
+  if (unsubscribe) unsubscribe();
+  unsubscribe = onValue(dbRef, snap => {
+    const data = snap.val();
+    if (data) {
+      ['CBOB-120','CBOB-30','CBOB-5'].forEach(m => {
+        state[m] = data[m] ? Object.entries(data[m]).map(([id, v]) => ({ id, ...v })) : [];
+      });
+    } else {
+      state = { 'CBOB-120': [], 'CBOB-30': [], 'CBOB-5': [] };
+    }
+    render();
+    setSyncState('ok', '동기화됨');
+  }, err => {
+    setSyncState('err', '오류');
+  });
+}
+
+function setSyncState(s, label) {
+  const dot = document.getElementById('syncDot');
+  dot.className = 'sync-dot' + (s ? ' ' + s : '');
+  document.getElementById('syncLabel').textContent = label;
+}
+
+// ─── DB 쓰기 ──────────────────────────────────────────────
+async function dbSave(machine, item) {
+  if (!db) return;
+  const { id, ...data } = item;
+  await set(ref(db, `profiles/${machine}/${id}`), data);
+}
+async function dbDelete(machine, itemId) {
+  if (!db) return;
+  await remove(ref(db, `profiles/${machine}/${itemId}`));
+}
+
+// ─── 렌더 ─────────────────────────────────────────────────
+function render() {
+  const el = document.getElementById('content');
+  const items = state[curMachine] || [];
+
+  if (!DB_URL) {
+    el.innerHTML = configBanner();
+    return;
+  }
+
+  let html = '';
+  if (!items.length) {
+    html = '<div class="empty">📋 품목을 추가해주세요</div>';
+  } else {
+    html = items.map(renderItem).join('');
+  }
+  html += `<button class="add-item-btn" onclick="openAddItem()">＋ 품목 추가</button>`;
+  el.innerHTML = html;
+}
+
+function configBanner() {
+  return `<div class="config-banner">
+    <h3>🔧 Firebase 연결 필요</h3>
+    <p>Firebase Realtime Database URL을 입력하면 팀 전체가 실시간으로 데이터를 공유할 수 있습니다.</p>
+    <div class="config-input-wrap">
+      <input class="config-input" id="fbUrlInput" placeholder="https://your-app-default-rtdb.firebaseio.com" />
+      <button class="config-btn" onclick="connectFirebase()">연결</button>
+    </div>
+  </div>
+  <div class="empty" style="padding:20px 0;color:var(--text3);font-size:12px">Firebase URL을 입력한 후 품목을 추가하세요</div>`;
+}
+
+function renderItem(item) {
+  const logs = item.logs ? Object.entries(item.logs).map(([id, v]) => ({ id, ...v })).sort((a, b) => (a.date || '').localeCompare(b.date || '')) : [];
+  const show = logs.slice(-5);
+  const hasMore = logs.length > 5;
+  const memos = logs.filter(l => l.memo).slice(-2);
+
+  const thead = `<div class="log-thead">
+    <span>1차크랙</span><span>배출</span><span>DTR</span><span style="text-align:right">수율/날짜</span>
+  </div>`;
+
+  const rows = show.map(l => {
+    const flagClass = l.flag === 'R' ? 'flag-r' : l.flag === '★' ? 'flag-best' : '';
+    const flagHtml = l.flag ? `<span class="flag ${flagClass}">${l.flag}</span>` : '';
+    return `<div class="log-row" onclick="openEditLog('${item.id}','${l.id}')">
+      <span class="log-val">${l.crack || '—'}</span>
+      <span class="log-val">${l.discharge || '—'}</span>
+      <span class="log-dtr">${l.dtr || '—'}${flagHtml}</span>
+      <div class="log-meta">
+        ${l.weight ? `<span class="log-weight">${l.weight}%</span>` : ''}
+        <span class="log-date">${l.date ? l.date.slice(5).replace('-', '/') : '—'}</span>
+      </div>
+    </div>`;
+  }).join('');
+
+  const memoHtml = memos.map(l => `<div class="memo-row"><span class="memo-icon">✎</span>${l.memo}</div>`).join('');
+
+  const moreHtml = hasMore ? `<div class="more-row"><button class="more-btn" onclick="openDetail('${item.id}')">전체 ${logs.length}회 기록 보기</button></div>` : '';
+
+  return `<div class="item-card">
+    <div class="item-head">
+      <span class="item-name">${item.name}</span>
+      <div class="item-btns">
+        <button class="icon-btn" onclick="openAddLog('${item.id}')" title="배치 추가">＋</button>
+        <button class="icon-btn" onclick="openEditItem('${item.id}')" title="수정">✎</button>
+        <button class="icon-btn" onclick="confirmDeleteItem('${item.id}')" title="삭제" style="color:var(--text3)">✕</button>
+      </div>
+    </div>
+    <div class="log-table">${thead}${rows}</div>
+    ${memoHtml}${moreHtml}
+  </div>`;
+}
+
+// ─── 품목 ─────────────────────────────────────────────────
+window.openAddItem = function() {
+  editingItemId = null;
+  document.getElementById('modalTitle').textContent = '품목 추가';
+  document.getElementById('modalBody').innerHTML = `
+    <div class="form-group">
+      <label class="form-label">품목명</label>
+      <input class="form-input" id="fi-name" placeholder="예: 🔴 다크블렌드" autocomplete="off" />
+    </div>`;
+  document.getElementById('modalFooter').innerHTML = `
+    <button class="btn-cancel" onclick="closeModal()">취소</button>
+    <button class="btn-save" onclick="saveItem()">저장</button>`;
+  showModal();
+  setTimeout(() => document.getElementById('fi-name').focus(), 200);
+};
+
+window.openEditItem = function(id) {
+  editingItemId = id;
+  const item = findItem(id);
+  document.getElementById('modalTitle').textContent = '품목 수정';
+  document.getElementById('modalBody').innerHTML = `
+    <div class="form-group">
+      <label class="form-label">품목명</label>
+      <input class="form-input" id="fi-name" value="${item.name}" autocomplete="off" />
+    </div>`;
+  document.getElementById('modalFooter').innerHTML = `
+    <button class="btn-cancel" onclick="closeModal()">취소</button>
+    <button class="btn-save" onclick="saveItem()">저장</button>`;
+  showModal();
+};
+
+window.saveItem = async function() {
+  const name = document.getElementById('fi-name').value.trim();
+  if (!name) return;
+  const items = state[curMachine] || [];
+  if (editingItemId) {
+    const item = findItem(editingItemId);
+    item.name = name;
+    await dbSave(curMachine, item);
+  } else {
+    const newItem = { id: 'i' + Date.now(), name, logs: {} };
+    await dbSave(curMachine, newItem);
+  }
+  closeModal();
+};
+
+window.confirmDeleteItem = function(id) {
+  const item = findItem(id);
+  document.getElementById('modalTitle').textContent = '품목 삭제';
+  document.getElementById('modalBody').innerHTML = `<p style="font-size:14px;color:var(--text2);line-height:1.7">"${item.name}" 품목과 모든 배치 기록을 삭제합니다. 복구할 수 없습니다.</p>`;
+  document.getElementById('modalFooter').innerHTML = `
+    <button class="btn-cancel" onclick="closeModal()">취소</button>
+    <button class="btn-delete" onclick="doDeleteItem('${id}')">삭제</button>`;
+  showModal();
+};
+
+window.doDeleteItem = async function(id) {
+  await dbDelete(curMachine, id);
+  closeModal();
+};
+
+// ─── 배치 로그 ─────────────────────────────────────────────
+function logFormHtml(l = {}) {
+  const crack = l.crack || '';
+  const crackTemp = crack.split(' ')[0] || '';
+  const crackTime = crack.split(' ')[1] || '';
+  const dis = l.discharge || '';
+  const disTemp = dis.split(' ')[0] || '';
+  const disTime = dis.split(' ')[1] || '';
+  return `
+    <div class="form-group">
+      <label class="form-label">날짜</label>
+      <input type="date" class="form-input" id="fl-date" value="${l.date || new Date().toISOString().slice(0, 10)}" />
+    </div>
+    <div class="form-group">
+      <label class="form-label">1차 크랙</label>
+      <div class="form-row2">
+        <input class="form-input" id="fl-ct" type="number" placeholder="온도 182" value="${crackTemp}" />
+        <input class="form-input" id="fl-ctime" placeholder="시간 16:55" value="${crackTime}" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">배출</label>
+      <div class="form-row2">
+        <input class="form-input" id="fl-dt" type="number" placeholder="온도 197" value="${disTemp}" />
+        <input class="form-input" id="fl-dtime" placeholder="시간 20:10" value="${disTime}" />
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="form-row3">
+        <div>
+          <label class="form-label">DTR</label>
+          <input class="form-input" id="fl-dtr" placeholder="3:15" value="${l.dtr || ''}" />
+        </div>
+        <div>
+          <label class="form-label">수율%</label>
+          <input class="form-input" id="fl-weight" type="number" step="0.01" placeholder="57.84" value="${l.weight || ''}" />
+        </div>
+        <div>
+          <label class="form-label">플래그</label>
+          <select class="form-select" id="fl-flag">
+            <option value="" ${!l.flag ? 'selected' : ''}>없음</option>
+            <option value="R" ${l.flag === 'R' ? 'selected' : ''}>R</option>
+            <option value="★" ${l.flag === '★' ? 'selected' : ''}>★</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">메모 (설정변경·블렌딩 비율 등)</label>
+      <textarea class="form-textarea" id="fl-memo" placeholder="예: 배기 1300 화력최대">${l.memo || ''}</textarea>
+    </div>`;
+}
+
+function getLogFormData() {
+  const ct = document.getElementById('fl-ct').value.trim();
+  const ctime = document.getElementById('fl-ctime').value.trim();
+  const dt = document.getElementById('fl-dt').value.trim();
+  const dtime = document.getElementById('fl-dtime').value.trim();
+  return {
+    date: document.getElementById('fl-date').value,
+    crack: [ct, ctime].filter(Boolean).join(' '),
+    discharge: [dt, dtime].filter(Boolean).join(' '),
+    dtr: document.getElementById('fl-dtr').value.trim(),
+    weight: document.getElementById('fl-weight').value.trim(),
+    flag: document.getElementById('fl-flag').value,
+    memo: document.getElementById('fl-memo').value.trim(),
+  };
+}
+
+window.openAddLog = function(itemId) {
+  editingLogId = null;
+  editingItemId = itemId;
+  document.getElementById('modalTitle').textContent = '배치 기록 추가';
+  document.getElementById('modalBody').innerHTML = logFormHtml();
+  document.getElementById('modalFooter').innerHTML = `
+    <button class="btn-cancel" onclick="closeModal()">취소</button>
+    <button class="btn-save" onclick="saveLog()">저장</button>`;
+  showModal();
+};
+
+window.openEditLog = function(itemId, logId) {
+  const item = findItem(itemId);
+  const logs = item.logs || {};
+  const log = logs[logId] || {};
+  editingItemId = itemId;
+  editingLogId = logId;
+  document.getElementById('modalTitle').textContent = '배치 수정';
+  document.getElementById('modalBody').innerHTML = logFormHtml(log);
+  document.getElementById('modalFooter').innerHTML = `
+    <button class="btn-delete" onclick="doDeleteLog()">삭제</button>
+    <button class="btn-save" onclick="saveLog()">저장</button>`;
+  showModal();
+};
+
+window.saveLog = async function() {
+  const data = getLogFormData();
+  const item = findItem(editingItemId);
+  const logId = editingLogId || ('l' + Date.now());
+  if (!item.logs) item.logs = {};
+  await set(ref(db, `profiles/${curMachine}/${editingItemId}/logs/${logId}`), data);
+  closeModal();
+};
+
+window.doDeleteLog = async function() {
+  if (!confirm('이 배치 기록을 삭제할까요?')) return;
+  await remove(ref(db, `profiles/${curMachine}/${editingItemId}/logs/${editingLogId}`));
+  closeModal();
+};
+
+// ─── 전체 이력 ─────────────────────────────────────────────
+window.openDetail = function(itemId) {
+  detailItemId = itemId;
+  const item = findItem(itemId);
+  const logs = item.logs ? Object.entries(item.logs).map(([id, v]) => ({ id, ...v })).sort((a, b) => (b.date || '').localeCompare(a.date || '')) : [];
+  const rows = logs.map(l => {
+    const flagClass = l.flag === 'R' ? 'flag-r' : l.flag === '★' ? 'flag-best' : '';
+    const flagHtml = l.flag ? `<span class="flag ${flagClass}" style="margin-left:0">${l.flag}</span>` : '';
+    return `<div class="detail-item">
+      <div class="detail-item-head">
+        <span class="detail-date">${l.date || '—'} ${flagHtml}</span>
+        <div class="detail-btns">
+          <button class="detail-edit-btn" onclick="openEditLog('${itemId}','${l.id}')">수정</button>
+        </div>
+      </div>
+      <div class="detail-vals">
+        <span class="detail-val">1크 <b>${l.crack || '—'}</b></span>
+        <span class="detail-val">배출 <b>${l.discharge || '—'}</b></span>
+        <span class="detail-val">DTR <b>${l.dtr || '—'}</b></span>
+        ${l.weight ? `<span class="detail-val">수율 <b>${l.weight}%</b></span>` : ''}
+      </div>
+      ${l.memo ? `<div class="detail-memo">✎ ${l.memo}</div>` : ''}
+    </div>`;
+  }).join('') || '<div class="empty">기록 없음</div>';
+
+  document.getElementById('modalTitle').textContent = item.name + ' · 전체 이력';
+  document.getElementById('modalBody').innerHTML = rows;
+  document.getElementById('modalFooter').innerHTML = `
+    <button class="btn-cancel" style="flex:1" onclick="closeModal()">닫기</button>
+    <button class="btn-save" onclick="openAddLog('${itemId}')">+ 추가</button>`;
+  showModal();
+};
+
+// ─── 유틸 ─────────────────────────────────────────────────
+function findItem(id) {
+  for (const m of ['CBOB-120', 'CBOB-30', 'CBOB-5']) {
+    const f = (state[m] || []).find(i => i.id === id);
+    if (f) return f;
+  }
+}
+
+window.switchMachine = function(el) {
+  curMachine = el.dataset.m;
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  render();
+};
+
+window.connectFirebase = function() {
+  const url = document.getElementById('fbUrlInput').value.trim();
+  if (!url) return;
+  initFirebase(url);
+};
+
+function showModal() {
+  document.getElementById('modalBg').classList.add('show');
+}
+window.closeModal = function() {
+  document.getElementById('modalBg').classList.remove('show');
+  editingItemId = null; editingLogId = null;
+};
+window.bgClose = function(e) {
+  if (e.target === document.getElementById('modalBg')) closeModal();
+};
+
+// 앱 시작
+if (DB_URL) {
+  initFirebase(DB_URL);
+} else {
+  render();
+}
+</script>
+
+
+</body></html>
