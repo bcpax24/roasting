@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>원당커피공장 · 로스팅프로파일</title>
+<title>원당커피공장 · 로스팅 프로파일</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@400;500;700&display=swap');
 
@@ -75,6 +75,7 @@
   .item-name { font-size: 15px; font-weight: 500; letter-spacing: -.01em; }
   .item-name-wrap { display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1; }
   .item-blend { font-size: 11px; color: var(--text2); font-family: var(--mono); line-height: 1.4; }
+  .item-input { font-size: 12px; color: var(--accent2); font-family: var(--mono); font-weight: 500; margin-left: 7px; }
   .item-btns { display: flex; gap: 2px; }
   .icon-btn {
     width: 32px; height: 32px; border-radius: 6px;
@@ -544,11 +545,12 @@ function renderItem(item) {
   const moreHtml = hasMore ? `<div class="more-row"><button class="more-btn" onclick="openDetail('${item.id}')">전체 ${logs.length}회 기록 보기</button></div>` : '';
 
   const blendHtml = item.blend ? `<div class="item-blend">${item.blend}</div>` : '';
+  const inputHtml = item.input ? `<span class="item-input">${/[a-zA-Z]/.test(item.input) ? item.input : item.input + 'kg'}</span>` : '';
 
   return `<div class="item-card">
     <div class="item-head">
       <div class="item-name-wrap">
-        <span class="item-name">${item.name}</span>
+        <span class="item-name">${item.name}${inputHtml}</span>
         ${blendHtml}
       </div>
       <div class="item-btns">
@@ -573,6 +575,10 @@ window.openAddItem = function() {
     <div class="form-group">
       <label class="form-label">블렌드 성분 (선택)</label>
       <input class="form-input" id="fi-blend" placeholder="예: 브라질 60% 에티오피아 20% 콜롬비아 10%" autocomplete="off" />
+    </div>
+    <div class="form-group">
+      <label class="form-label">생두투입량 (kg, 선택)</label>
+      <input class="form-input" id="fi-input" type="text" placeholder="예: 60, 1kg, 500g, 250g" autocomplete="off" />
     </div>`;
   document.getElementById('modalFooter').innerHTML = `
     <button class="btn-cancel" onclick="closeModal()">취소</button>
@@ -593,6 +599,10 @@ window.openEditItem = function(id) {
     <div class="form-group">
       <label class="form-label">블렌드 성분 (선택)</label>
       <input class="form-input" id="fi-blend" value="${item.blend || ''}" placeholder="예: 브라질 60% 에티오피아 20% 콜롬비아 10%" autocomplete="off" />
+    </div>
+    <div class="form-group">
+      <label class="form-label">생두투입량 (kg, 선택)</label>
+      <input class="form-input" id="fi-input" type="text" value="${item.input || ''}" placeholder="예: 60, 1kg, 500g, 250g" autocomplete="off" />
     </div>`;
   document.getElementById('modalFooter').innerHTML = `
     <button class="btn-cancel" onclick="closeModal()">취소</button>
@@ -603,14 +613,16 @@ window.openEditItem = function(id) {
 window.saveItem = async function() {
   const name = document.getElementById('fi-name').value.trim();
   const blend = document.getElementById('fi-blend').value.trim();
+  const input = document.getElementById('fi-input').value.trim();
   if (!name) return;
   if (editingItemId) {
     const item = findItem(editingItemId);
     item.name = name;
     item.blend = blend;
+    item.input = input;
     await dbSave(curMachine, item);
   } else {
-    const newItem = { id: 'i' + Date.now(), name, blend, logs: {} };
+    const newItem = { id: 'i' + Date.now(), name, blend, input, logs: {} };
     await dbSave(curMachine, newItem);
   }
   closeModal();
