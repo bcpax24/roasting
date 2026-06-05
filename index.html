@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>원당커피공장 · 로스팅 프로파일</title>
+<title>원당커피공장 · 로스팅프로파일</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@400;500;700&display=swap');
 
@@ -73,6 +73,8 @@
     border-bottom: 1px solid var(--border);
   }
   .item-name { font-size: 15px; font-weight: 500; letter-spacing: -.01em; }
+  .item-name-wrap { display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1; }
+  .item-blend { font-size: 11px; color: var(--text2); font-family: var(--mono); line-height: 1.4; }
   .item-btns { display: flex; gap: 2px; }
   .icon-btn {
     width: 32px; height: 32px; border-radius: 6px;
@@ -98,13 +100,14 @@
   .log-val { font-family: var(--mono); font-size: 12px; color: var(--text); }
   .log-dtr { font-family: var(--mono); font-size: 12px; color: var(--accent); font-weight: 500; }
   .log-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
-  .log-date { font-size: 10px; color: var(--text3); font-family: var(--mono); }
-  .log-weight { font-size: 10px; color: var(--text2); font-family: var(--mono); }
+  .log-date { font-size: 10px; color: var(--blue); font-family: var(--mono); font-weight: 500; }
+  .log-weight { font-size: 10px; color: var(--green); font-family: var(--mono); font-weight: 500; }
 
   .flag { display: inline-block; font-size: 9px; font-family: var(--mono); padding: 1px 4px; border-radius: 3px; margin-left: 3px; font-weight: 500; }
   .flag-d { background: rgba(192,48,48,.1); color: var(--red); border: 1px solid rgba(192,48,48,.25); }
   .flag-r { background: rgba(46,125,80,.1); color: var(--green); border: 1px solid rgba(46,125,80,.25); }
   .flag-best { background: rgba(184,112,32,.12); color: var(--accent); border: 1px solid rgba(184,112,32,.3); }
+  .flag-first { background: rgba(32,96,168,.1); color: var(--blue); border: 1px solid rgba(32,96,168,.28); }
 
   .memo-row {
     padding: 7px 14px;
@@ -185,6 +188,17 @@
   .modal-close { width: 28px; height: 28px; border-radius: 50%; background: var(--surface2); border: none; color: var(--text2); font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
   .modal-body { overflow-y: auto; padding: 16px 18px; flex: 1; }
 
+  .ref-panel { background: #eef4fb; border: 1px solid #cfe0f2; border-radius: 8px; padding: 10px 12px; margin-bottom: 16px; }
+  .ref-title { font-size: 11px; color: var(--blue); font-family: var(--mono); letter-spacing: .04em; margin-bottom: 8px; display: flex; align-items: center; gap: 5px; }
+  .ref-list { display: flex; flex-direction: column; gap: 5px; }
+  .ref-row { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 7px 9px; font-family: var(--mono); font-size: 11.5px; display: flex; justify-content: space-between; align-items: center; gap: 6px; cursor: pointer; transition: border-color .12s, background .12s; }
+  .ref-row:active { background: #e3eefb; }
+  .ref-row .rc { color: var(--text); flex: 1; }
+  .ref-row .rd { color: var(--accent); font-weight: 500; }
+  .ref-row .rdt { color: var(--blue); font-weight: 500; }
+  .ref-row .rw { color: var(--green); font-weight: 500; }
+  .ref-hint { font-size: 10px; color: var(--text3); margin-top: 7px; text-align: center; }
+
   .form-group { margin-bottom: 14px; }
   .form-label { display: block; font-size: 11px; color: var(--text3); font-family: var(--mono); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 6px; }
   .form-input, .form-textarea, .form-select {
@@ -230,7 +244,7 @@
 <body>
 
 <div class="header">
-  <div class="logo">원당커피공장<span> / 로스팅</span></div>
+  <div class="logo">원당커피공장<span> / 로스팅 프로파일</span></div>
   <div class="header-right">
     <div class="sync-dot" id="syncDot"></div>
     <span class="sync-label" id="syncLabel">연결중</span>
@@ -434,7 +448,7 @@ function renderSettings() {
 
   return `<div class="settings-card">
     <div class="settings-head">
-      <span class="settings-title">⚙ 기계 세팅값</span>
+      <span class="settings-title">⚙ 세팅값</span>
       <button class="icon-btn" onclick="openEditSettings()" title="세팅 수정" style="color:var(--accent2)">✎</button>
     </div>
     <div class="settings-body">${groups}</div>
@@ -457,6 +471,7 @@ function flagClass(f) {
   if (f === 'D') return 'flag-d';
   if (f === 'R') return 'flag-r';
   if (f === '★') return 'flag-best';
+  if (f === '1') return 'flag-first';
   return '';
 }
 
@@ -528,9 +543,14 @@ function renderItem(item) {
   const memoHtml = memos.map(l => `<div class="memo-row"><span class="memo-icon">✎</span>${l.memo}</div>`).join('');
   const moreHtml = hasMore ? `<div class="more-row"><button class="more-btn" onclick="openDetail('${item.id}')">전체 ${logs.length}회 기록 보기</button></div>` : '';
 
+  const blendHtml = item.blend ? `<div class="item-blend">${item.blend}</div>` : '';
+
   return `<div class="item-card">
     <div class="item-head">
-      <span class="item-name">${item.name}</span>
+      <div class="item-name-wrap">
+        <span class="item-name">${item.name}</span>
+        ${blendHtml}
+      </div>
       <div class="item-btns">
         <button class="icon-btn" onclick="openAddLog('${item.id}')" title="배치 추가">＋</button>
         <button class="icon-btn" onclick="openEditItem('${item.id}')" title="수정">✎</button>
@@ -543,11 +563,16 @@ function renderItem(item) {
 }
 
 window.openAddItem = function() {
+  editingItemId = null;
   document.getElementById('modalTitle').textContent = '품목 추가';
   document.getElementById('modalBody').innerHTML = `
     <div class="form-group">
       <label class="form-label">품목명</label>
       <input class="form-input" id="fi-name" placeholder="예: 🔴 다크블렌드" autocomplete="off" />
+    </div>
+    <div class="form-group">
+      <label class="form-label">블렌드 성분 (선택)</label>
+      <input class="form-input" id="fi-blend" placeholder="예: 브라질 60% 에티오피아 20% 콜롬비아 10%" autocomplete="off" />
     </div>`;
   document.getElementById('modalFooter').innerHTML = `
     <button class="btn-cancel" onclick="closeModal()">취소</button>
@@ -564,6 +589,10 @@ window.openEditItem = function(id) {
     <div class="form-group">
       <label class="form-label">품목명</label>
       <input class="form-input" id="fi-name" value="${item.name}" autocomplete="off" />
+    </div>
+    <div class="form-group">
+      <label class="form-label">블렌드 성분 (선택)</label>
+      <input class="form-input" id="fi-blend" value="${item.blend || ''}" placeholder="예: 브라질 60% 에티오피아 20% 콜롬비아 10%" autocomplete="off" />
     </div>`;
   document.getElementById('modalFooter').innerHTML = `
     <button class="btn-cancel" onclick="closeModal()">취소</button>
@@ -573,13 +602,15 @@ window.openEditItem = function(id) {
 
 window.saveItem = async function() {
   const name = document.getElementById('fi-name').value.trim();
+  const blend = document.getElementById('fi-blend').value.trim();
   if (!name) return;
   if (editingItemId) {
     const item = findItem(editingItemId);
     item.name = name;
+    item.blend = blend;
     await dbSave(curMachine, item);
   } else {
-    const newItem = { id: 'i' + Date.now(), name, logs: {} };
+    const newItem = { id: 'i' + Date.now(), name, blend, logs: {} };
     await dbSave(curMachine, newItem);
   }
   closeModal();
@@ -640,6 +671,7 @@ function logFormHtml(l = {}) {
           <label class="form-label">플래그</label>
           <select class="form-select" id="fl-flag">
             <option value="" ${!l.flag ? 'selected' : ''}>없음</option>
+            <option value="1" ${l.flag === '1' ? 'selected' : ''}>1</option>
             <option value="D" ${l.flag === 'D' ? 'selected' : ''}>D</option>
             <option value="R" ${l.flag === 'R' ? 'selected' : ''}>R</option>
             <option value="★" ${l.flag === '★' ? 'selected' : ''}>★</option>
@@ -669,11 +701,51 @@ function getLogFormData() {
   };
 }
 
+function refPanelHtml(itemId) {
+  const item = findItem(itemId);
+  if (!item || !item.logs) return '';
+  const logs = Object.entries(item.logs).map(([id, v]) => ({ id, ...v }))
+    .sort((a, b) => (a.date || '').localeCompare(b.date || ''));
+  const recent = logs.slice(-3).reverse();
+  if (!recent.length) return '';
+  const rows = recent.map(l => {
+    const w = l.weight ? `<span class="rw">${l.weight}kg</span>` : '';
+    const d = l.date ? `<span class="rdt">${l.date.slice(5).replace('-', '/')}</span>` : '';
+    const payload = encodeURIComponent(JSON.stringify({
+      crack: l.crack || '', discharge: l.discharge || '', dtr: l.dtr || '', weight: l.weight || ''
+    }));
+    return `<div class="ref-row" onclick="fillFromRef('${payload}')">
+      <span class="rc">${l.crack || '—'} / ${l.discharge || '—'}</span>
+      <span class="rd">${l.dtr || '—'}</span>
+      ${w}${d}
+    </div>`;
+  }).join('');
+  return `<div class="ref-panel">
+    <div class="ref-title"><span>↺ 최근 기록 3개</span></div>
+    <div class="ref-list">${rows}</div>
+    <div class="ref-hint">탭하면 값이 입력란에 채워집니다</div>
+  </div>`;
+}
+
+window.fillFromRef = function(payload) {
+  let d;
+  try { d = JSON.parse(decodeURIComponent(payload)); } catch(e) { return; }
+  const crackParts = (d.crack || '').split(' ');
+  const disParts = (d.discharge || '').split(' ');
+  const set = (id, val) => { const el = document.getElementById(id); if (el) el.value = val || ''; };
+  set('fl-ct', crackParts[0] || '');
+  set('fl-ctime', crackParts[1] || '');
+  set('fl-dt', disParts[0] || '');
+  set('fl-dtime', disParts[1] || '');
+  set('fl-dtr', d.dtr || '');
+  set('fl-weight', d.weight || '');
+};
+
 window.openAddLog = function(itemId) {
   editingLogId = null;
   editingItemId = itemId;
   document.getElementById('modalTitle').textContent = '배치 기록 추가';
-  document.getElementById('modalBody').innerHTML = logFormHtml();
+  document.getElementById('modalBody').innerHTML = refPanelHtml(itemId) + logFormHtml();
   document.getElementById('modalFooter').innerHTML = `
     <button class="btn-cancel" onclick="closeModal()">취소</button>
     <button class="btn-save" onclick="saveLog()">저장</button>`;
