@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0067)file:///C:/Users/%EB%B0%95%EB%B2%94%EC%B0%BD/Downloads/index_1.html -->
+<!-- saved from url=(0067)file:///C:/Users/%EB%B0%95%EB%B2%94%EC%B0%BD/Downloads/index_3.html -->
 <html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -241,6 +241,47 @@
   .detail-edit-btn { font-size: 11px; color: var(--text3); background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 3px 8px; cursor: pointer; font-family: var(--mono); }
 
   .loading-state { text-align: center; padding: 32px; color: var(--text3); font-family: var(--mono); font-size: 12px; }
+
+  .bc-row { display: grid; grid-template-columns: 1fr 58px 30px; gap: 6px; margin-bottom: 6px; }
+  .bc-row input { font-size: 14px; }
+  .bc-del { border: 1px solid var(--border); background: var(--surface2); border-radius: var(--border-radius-md, 8px); color: var(--red); cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; }
+  .bc-add { font-size: 12px; color: var(--accent); font-family: var(--mono); background: none; border: none; cursor: pointer; padding: 4px 0; }
+  .bc-sum { font-size: 11px; font-family: var(--mono); margin-top: 4px; }
+  .bc-sum.ok { color: var(--green); }
+  .bc-sum.bad { color: var(--red); }
+  .bc-bar { display: flex; height: 22px; border-radius: 6px; overflow: hidden; margin-top: 8px; }
+  .bc-seg { display: flex; align-items: center; justify-content: center; font-size: 9px; color: #fff; font-family: var(--mono); overflow: hidden; white-space: nowrap; }
+
+  .dash-sub { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 14px; }
+  .dsub { flex: 1; text-align: center; padding: 9px 0; font-size: 12px; font-family: var(--mono); color: var(--text3); border-bottom: 2px solid transparent; cursor: pointer; margin-bottom: -1px; }
+  .dsub.on { color: var(--text); border-bottom-color: var(--accent); font-weight: 500; }
+  .d-mcards { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 14px; }
+  .d-mc { background: var(--surface2); border-radius: 8px; padding: 10px 12px; }
+  .d-mc-l { font-size: 11px; color: var(--text2); }
+  .d-mc-v { font-size: 20px; font-weight: 500; margin-top: 2px; }
+  .d-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 11px 13px; margin-bottom: 8px; }
+  .d-crow { display: flex; justify-content: space-between; align-items: center; }
+  .d-cname { font-size: 14px; font-weight: 500; }
+  .d-cmeta { font-size: 11px; color: var(--accent2); font-family: var(--mono); }
+  .d-cnt { font-size: 11px; color: var(--text3); font-family: var(--mono); margin-top: 3px; }
+  .d-cwt { font-size: 11px; color: var(--green); font-family: var(--mono); font-weight: 500; margin-top: 2px; }
+  .d-mtag { font-size: 10px; color: var(--text3); font-family: var(--mono); margin-left: 6px; }
+  .d-date-bar { display: flex; gap: 8px; align-items: center; background: var(--surface2); border-radius: 8px; padding: 4px 10px; margin-bottom: 14px; }
+  .d-date-bar input { border: none; background: none; font-family: var(--mono); font-size: 14px; color: var(--text); flex: 1; outline: none; }
+  .d-seg-toggle { display: flex; gap: 6px; margin-bottom: 14px; }
+  .d-seg-btn { flex: 1; padding: 7px 0; font-size: 12px; font-family: var(--mono); border: 1px solid var(--border); border-radius: 7px; background: var(--surface); color: var(--text2); cursor: pointer; }
+  .d-seg-btn.on { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .d-bar-item { margin-bottom: 10px; }
+  .d-bar-top { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 3px; }
+  .d-bar-name { font-weight: 500; }
+  .d-bar-val { font-family: var(--mono); color: var(--text2); }
+  .d-bar-track { height: 8px; background: var(--surface2); border-radius: 4px; overflow: hidden; }
+  .d-bar-fill { height: 100%; border-radius: 4px; background: var(--accent); }
+  .d-blend-item { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 12px 13px; margin-bottom: 10px; }
+  .d-blend-name { font-size: 14px; font-weight: 500; margin-bottom: 8px; }
+  .d-lg { display: flex; flex-wrap: wrap; gap: 10px; font-size: 11px; color: var(--text2); margin-top: 7px; }
+  .d-lg span { display: flex; align-items: center; gap: 4px; }
+  .d-dot { width: 9px; height: 9px; border-radius: 2px; flex-shrink: 0; }
 </style>
 </head>
 <body>
@@ -254,9 +295,10 @@
 </div>
 
 <div class="tabs">
-  <button class="tab active" data-m="CBOB-120" onclick="switchMachine(this)">CBOB-120</button>
-  <button class="tab" data-m="CBOB-30" onclick="switchMachine(this)">CBOB-30</button>
-  <button class="tab" data-m="CBOB-5" onclick="switchMachine(this)">CBOB-5</button>
+  <button class="tab" data-view="dashboard" onclick="switchTab(this)">현황</button>
+  <button class="tab active" data-m="CBOB-120" onclick="switchTab(this)">CBOB-120</button>
+  <button class="tab" data-m="CBOB-30" onclick="switchTab(this)">CBOB-30</button>
+  <button class="tab" data-m="CBOB-5" onclick="switchTab(this)">CBOB-5</button>
 </div>
 
 <div class="content" id="content"><div class="settings-card">
@@ -292,55 +334,7 @@
     </div>
     <div class="log-table"><div class="log-thead">
     <span>1차크랙</span><span>배출</span><span>DTR</span><span style="text-align:right">무게/날짜</span>
-  </div><div class="log-row" onclick="openEditLog(&#39;i1000&#39;,&#39;l1781497260039&#39;)">
-      <span class="log-val">182 16:25</span>
-      <span class="log-val">197 20:00</span>
-      <span class="log-dtr">3:35<span class="flag flag-r">R</span></span>
-      <div class="log-meta">
-        
-        <span class="log-date">06/15</span>
-      </div>
-    </div><div class="log-row" onclick="openEditLog(&#39;i1000&#39;,&#39;l1781575293902&#39;)">
-      <span class="log-val">182 16:10</span>
-      <span class="log-val">197 19:30</span>
-      <span class="log-dtr">3:20</span>
-      <div class="log-meta">
-        
-        <span class="log-date">06/16</span>
-      </div>
-    </div><div class="log-row" onclick="openEditLog(&#39;i1000&#39;,&#39;l1781656695991&#39;)">
-      <span class="log-val">182 16:40</span>
-      <span class="log-val">197 20:20</span>
-      <span class="log-dtr">3:40<span class="flag flag-first">1</span></span>
-      <div class="log-meta">
-        
-        <span class="log-date">06/17</span>
-      </div>
-    </div><div class="log-row" onclick="openEditLog(&#39;i1000&#39;,&#39;l1781658076651&#39;)">
-      <span class="log-val">182 16:45</span>
-      <span class="log-val">197 20:15</span>
-      <span class="log-dtr">3:30</span>
-      <div class="log-meta">
-        
-        <span class="log-date">06/17</span>
-      </div>
-    </div><div class="log-row" onclick="openEditLog(&#39;i1000&#39;,&#39;l1781668292810&#39;)">
-      <span class="log-val">182 18:10</span>
-      <span class="log-val">197 21:55</span>
-      <span class="log-dtr">3:45<span class="flag flag-first">1</span></span>
-      <div class="log-meta">
-        
-        <span class="log-date">06/17</span>
-      </div>
-    </div><div class="log-row" onclick="openEditLog(&#39;i1000&#39;,&#39;l1781671808971&#39;)">
-      <span class="log-val">182 18:00</span>
-      <span class="log-val">197 21:40</span>
-      <span class="log-dtr">3:40</span>
-      <div class="log-meta">
-        
-        <span class="log-date">06/17</span>
-      </div>
-    </div><div class="log-row" onclick="openEditLog(&#39;i1000&#39;,&#39;l1781744139278&#39;)">
+  </div><div class="log-row" onclick="openEditLog(&#39;i1000&#39;,&#39;l1781744139278&#39;)">
       <span class="log-val">182 16:40</span>
       <span class="log-val">197 20:15</span>
       <span class="log-dtr">3:35</span>
@@ -372,8 +366,56 @@
         
         <span class="log-date">06/18</span>
       </div>
+    </div><div class="log-row" onclick="openEditLog(&#39;i1000&#39;,&#39;l1781829006415&#39;)">
+      <span class="log-val">182 16:25</span>
+      <span class="log-val">197 20:00</span>
+      <span class="log-dtr">3:35<span class="flag flag-d">D</span></span>
+      <div class="log-meta">
+        
+        <span class="log-date">06/19</span>
+      </div>
+    </div><div class="memo-row"><span class="memo-icon">✎</span>198배출 변경</div><div class="log-row" onclick="openEditLog(&#39;i1000&#39;,&#39;l1781830668658&#39;)">
+      <span class="log-val">182 16:40</span>
+      <span class="log-val">198 20:25</span>
+      <span class="log-dtr">3:45<span class="flag flag-d">D</span></span>
+      <div class="log-meta">
+        
+        <span class="log-date">06/19</span>
+      </div>
+    </div><div class="log-row" onclick="openEditLog(&#39;i1000&#39;,&#39;l1781833941267&#39;)">
+      <span class="log-val">183 16:40</span>
+      <span class="log-val">198 20:10</span>
+      <span class="log-dtr">3:30<span class="flag flag-r">R</span></span>
+      <div class="log-meta">
+        
+        <span class="log-date">06/19</span>
+      </div>
+    </div><div class="memo-row"><span class="memo-icon">✎</span>183 off 198 out</div><div class="log-row" onclick="openEditLog(&#39;i1000&#39;,&#39;l1782086353092&#39;)">
+      <span class="log-val">183 17:20</span>
+      <span class="log-val">198 21:00</span>
+      <span class="log-dtr">3:40<span class="flag flag-d">D</span></span>
+      <div class="log-meta">
+        
+        <span class="log-date">06/21</span>
+      </div>
+    </div><div class="log-row" onclick="openEditLog(&#39;i1000&#39;,&#39;l1782091182304&#39;)">
+      <span class="log-val">183 17:10</span>
+      <span class="log-val">198 20:40</span>
+      <span class="log-dtr">3:30<span class="flag flag-d">D</span></span>
+      <div class="log-meta">
+        
+        <span class="log-date">06/22</span>
+      </div>
+    </div><div class="log-row" onclick="openEditLog(&#39;i1000&#39;,&#39;l1782100260399&#39;)">
+      <span class="log-val">183 18:40</span>
+      <span class="log-val">198 22:25</span>
+      <span class="log-dtr">3:45<span class="flag flag-r">R</span></span>
+      <div class="log-meta">
+        
+        <span class="log-date">06/22</span>
+      </div>
     </div></div>
-    <div class="more-row"><button class="more-btn" onclick="openDetail(&#39;i1000&#39;)">전체 47회 기록 보기</button></div>
+    <div class="more-row"><button class="more-btn" onclick="openDetail(&#39;i1000&#39;)">전체 53회 기록 보기</button></div>
   </div><div class="item-card">
     <div class="item-head">
       <div class="item-name-wrap">
@@ -484,15 +526,7 @@
     </div>
     <div class="log-table"><div class="log-thead">
     <span>1차크랙</span><span>배출</span><span>DTR</span><span style="text-align:right">무게/날짜</span>
-  </div><div class="log-row" onclick="openEditLog(&#39;i1004&#39;,&#39;l100049&#39;)">
-      <span class="log-val">181 16:40</span>
-      <span class="log-val">188 18:20</span>
-      <span class="log-dtr">1:40</span>
-      <div class="log-meta">
-        <span class="log-weight">58.90kg</span>
-        <span class="log-date">—</span>
-      </div>
-    </div><div class="log-row" onclick="openEditLog(&#39;i1004&#39;,&#39;l100050&#39;)">
+  </div><div class="log-row" onclick="openEditLog(&#39;i1004&#39;,&#39;l100050&#39;)">
       <span class="log-val">181 18:05</span>
       <span class="log-val">188 19:55</span>
       <span class="log-dtr">1:50</span>
@@ -564,8 +598,16 @@
         <span class="log-weight">58.78kg</span>
         <span class="log-date">06/17</span>
       </div>
+    </div><div class="log-row" onclick="openEditLog(&#39;i1004&#39;,&#39;l1781832144447&#39;)">
+      <span class="log-val">181 18:10</span>
+      <span class="log-val">189 20:00</span>
+      <span class="log-dtr">1:50</span>
+      <div class="log-meta">
+        <span class="log-weight">58.90kg</span>
+        <span class="log-date">06/19</span>
+      </div>
     </div></div>
-    <div class="more-row"><button class="more-btn" onclick="openDetail(&#39;i1004&#39;)">전체 17회 기록 보기</button></div>
+    <div class="more-row"><button class="more-btn" onclick="openDetail(&#39;i1004&#39;)">전체 18회 기록 보기</button></div>
   </div><div class="item-card">
     <div class="item-head">
       <div class="item-name-wrap">
@@ -580,23 +622,7 @@
     </div>
     <div class="log-table"><div class="log-thead">
     <span>1차크랙</span><span>배출</span><span>DTR</span><span style="text-align:right">무게/날짜</span>
-  </div><div class="log-row" onclick="openEditLog(&#39;i1005&#39;,&#39;l100070&#39;)">
-      <span class="log-val">181 17:05</span>
-      <span class="log-val">189 18:45</span>
-      <span class="log-dtr">1:40</span>
-      <div class="log-meta">
-        <span class="log-weight">59.54kg</span>
-        <span class="log-date">—</span>
-      </div>
-    </div><div class="log-row" onclick="openEditLog(&#39;i1005&#39;,&#39;l100071&#39;)">
-      <span class="log-val">181 17:00</span>
-      <span class="log-val">188 18:40</span>
-      <span class="log-dtr">1:40</span>
-      <div class="log-meta">
-        <span class="log-weight">59.80kg</span>
-        <span class="log-date">—</span>
-      </div>
-    </div><div class="log-row" onclick="openEditLog(&#39;i1005&#39;,&#39;l100072&#39;)">
+  </div><div class="log-row" onclick="openEditLog(&#39;i1005&#39;,&#39;l100072&#39;)">
       <span class="log-val">181 17:20</span>
       <span class="log-val">188 19:00</span>
       <span class="log-dtr">1:40</span>
@@ -652,7 +678,7 @@
         <span class="log-weight">60.40kg</span>
         <span class="log-date">06/15</span>
       </div>
-    </div><div class="memo-row"><span class="memo-icon">✎</span>17/18</div><div class="log-row" onclick="openEditLog(&#39;i1005&#39;,&#39;l1781661249067&#39;)">
+    </div><div class="memo-row"><span class="memo-icon">✎</span>생두입고17/18</div><div class="log-row" onclick="openEditLog(&#39;i1005&#39;,&#39;l1781661249067&#39;)">
       <span class="log-val">181 15:50</span>
       <span class="log-val">188 17:30</span>
       <span class="log-dtr">1:40</span>
@@ -660,8 +686,24 @@
         <span class="log-weight">60.44kg</span>
         <span class="log-date">06/17</span>
       </div>
+    </div><div class="log-row" onclick="openEditLog(&#39;i1005&#39;,&#39;l1781827531439&#39;)">
+      <span class="log-val">181 17:00</span>
+      <span class="log-val">188 18:40</span>
+      <span class="log-dtr">1:40<span class="flag flag-first">1</span></span>
+      <div class="log-meta">
+        <span class="log-weight">60.52kg</span>
+        <span class="log-date">06/19</span>
+      </div>
+    </div><div class="log-row" onclick="openEditLog(&#39;i1005&#39;,&#39;l1782088037440&#39;)">
+      <span class="log-val">181 16:40</span>
+      <span class="log-val">188 18:20</span>
+      <span class="log-dtr">1:40</span>
+      <div class="log-meta">
+        <span class="log-weight">60.42kg</span>
+        <span class="log-date">06/22</span>
+      </div>
     </div></div>
-    <div class="more-row"><button class="more-btn" onclick="openDetail(&#39;i1005&#39;)">전체 25회 기록 보기</button></div>
+    <div class="more-row"><button class="more-btn" onclick="openDetail(&#39;i1005&#39;)">전체 27회 기록 보기</button></div>
   </div><div class="item-card">
     <div class="item-head">
       <div class="item-name-wrap">
@@ -772,15 +814,7 @@
     </div>
     <div class="log-table"><div class="log-thead">
     <span>1차크랙</span><span>배출</span><span>DTR</span><span style="text-align:right">무게/날짜</span>
-  </div><div class="log-row" onclick="openEditLog(&#39;i1007&#39;,&#39;l100090&#39;)">
-      <span class="log-val">181 16:30</span>
-      <span class="log-val">187 17:40</span>
-      <span class="log-dtr">1:10</span>
-      <div class="log-meta">
-        <span class="log-weight">59.46kg</span>
-        <span class="log-date">—</span>
-      </div>
-    </div><div class="log-row" onclick="openEditLog(&#39;i1007&#39;,&#39;l100091&#39;)">
+  </div><div class="log-row" onclick="openEditLog(&#39;i1007&#39;,&#39;l100091&#39;)">
       <span class="log-val">181 16:45</span>
       <span class="log-val">188 17:55</span>
       <span class="log-dtr">1:10</span>
@@ -852,8 +886,16 @@
         <span class="log-weight">60.24kg</span>
         <span class="log-date">06/12</span>
       </div>
+    </div><div class="log-row" onclick="openEditLog(&#39;i1007&#39;,&#39;l1782103769667&#39;)">
+      <span class="log-val">181 17:25</span>
+      <span class="log-val">197 18:35</span>
+      <span class="log-dtr">1:10</span>
+      <div class="log-meta">
+        <span class="log-weight">59.82kg</span>
+        <span class="log-date">06/22</span>
+      </div>
     </div></div>
-    <div class="more-row"><button class="more-btn" onclick="openDetail(&#39;i1007&#39;)">전체 13회 기록 보기</button></div>
+    <div class="more-row"><button class="more-btn" onclick="openDetail(&#39;i1007&#39;)">전체 14회 기록 보기</button></div>
   </div><div class="item-card">
     <div class="item-head">
       <div class="item-name-wrap">
@@ -1036,7 +1078,15 @@
         <span class="log-weight">58.38kg</span>
         <span class="log-date">06/12</span>
       </div>
-    </div><div class="memo-row"><span class="memo-icon">✎</span>로스팅점검</div></div>
+    </div><div class="memo-row"><span class="memo-icon">✎</span>로스팅점검</div><div class="log-row" onclick="openEditLog(&#39;i1009&#39;,&#39;l1781842344623&#39;)">
+      <span class="log-val">182 18:00</span>
+      <span class="log-val">191 20:00</span>
+      <span class="log-dtr">2:00</span>
+      <div class="log-meta">
+        <span class="log-weight">58.36kg</span>
+        <span class="log-date">06/19</span>
+      </div>
+    </div><div class="memo-row"><span class="memo-icon">✎</span>DTR 2:00 변경</div></div>
     
   </div><div class="item-card">
     <div class="item-head">
@@ -1092,15 +1142,7 @@
     </div>
     <div class="log-table"><div class="log-thead">
     <span>1차크랙</span><span>배출</span><span>DTR</span><span style="text-align:right">무게/날짜</span>
-  </div><div class="log-row" onclick="openEditLog(&#39;i1011&#39;,&#39;l100124&#39;)">
-      <span class="log-val">183 17:50</span>
-      <span class="log-val">191 20:50</span>
-      <span class="log-dtr">3:00</span>
-      <div class="log-meta">
-        <span class="log-weight">58.00kg</span>
-        <span class="log-date">—</span>
-      </div>
-    </div><div class="log-row" onclick="openEditLog(&#39;i1011&#39;,&#39;l100125&#39;)">
+  </div><div class="log-row" onclick="openEditLog(&#39;i1011&#39;,&#39;l100125&#39;)">
       <span class="log-val">182 17:10</span>
       <span class="log-val">189 20:10</span>
       <span class="log-dtr">3:00</span>
@@ -1161,7 +1203,7 @@
       <span class="log-val">188 21:05</span>
       <span class="log-dtr">3:00<span class="flag flag-first">1</span></span>
       <div class="log-meta">
-        
+        <span class="log-weight">58.34kg</span>
         <span class="log-date">06/08</span>
       </div>
     </div><div class="memo-row"><span class="memo-icon">✎</span>6/8입고</div><div class="log-row" onclick="openEditLog(&#39;i1011&#39;,&#39;l1781483030327&#39;)">
@@ -1172,8 +1214,16 @@
         <span class="log-weight">58.38kg</span>
         <span class="log-date">06/15</span>
       </div>
+    </div><div class="log-row" onclick="openEditLog(&#39;i1011&#39;,&#39;l1782107290051&#39;)">
+      <span class="log-val">182 18:20</span>
+      <span class="log-val">190 21:20</span>
+      <span class="log-dtr">3:00</span>
+      <div class="log-meta">
+        <span class="log-weight">58.34kg</span>
+        <span class="log-date">06/22</span>
+      </div>
     </div></div>
-    <div class="more-row"><button class="more-btn" onclick="openDetail(&#39;i1011&#39;)">전체 14회 기록 보기</button></div>
+    <div class="more-row"><button class="more-btn" onclick="openDetail(&#39;i1011&#39;)">전체 15회 기록 보기</button></div>
   </div><div class="item-card">
     <div class="item-head">
       <div class="item-name-wrap">
@@ -1188,15 +1238,7 @@
     </div>
     <div class="log-table"><div class="log-thead">
     <span>1차크랙</span><span>배출</span><span>DTR</span><span style="text-align:right">무게/날짜</span>
-  </div><div class="log-row" onclick="openEditLog(&#39;i1012&#39;,&#39;l100148&#39;)">
-      <span class="log-val">184 18:30</span>
-      <span class="log-val">197 21:40</span>
-      <span class="log-dtr">3:10</span>
-      <div class="log-meta">
-        <span class="log-weight">58.10kg</span>
-        <span class="log-date">—</span>
-      </div>
-    </div><div class="log-row" onclick="openEditLog(&#39;i1012&#39;,&#39;l100149&#39;)">
+  </div><div class="log-row" onclick="openEditLog(&#39;i1012&#39;,&#39;l100149&#39;)">
       <span class="log-val">184 17:10</span>
       <span class="log-val">197 20:10</span>
       <span class="log-dtr">3:00</span>
@@ -1268,8 +1310,16 @@
         
         <span class="log-date">06/18</span>
       </div>
+    </div><div class="log-row" onclick="openEditLog(&#39;i1012&#39;,&#39;l1781844284741&#39;)">
+      <span class="log-val">183 18:30</span>
+      <span class="log-val">198 22:15</span>
+      <span class="log-dtr">3:45</span>
+      <div class="log-meta">
+        <span class="log-weight">58.30kg</span>
+        <span class="log-date">06/19</span>
+      </div>
     </div></div>
-    <div class="more-row"><button class="more-btn" onclick="openDetail(&#39;i1012&#39;)">전체 26회 기록 보기</button></div>
+    <div class="more-row"><button class="more-btn" onclick="openDetail(&#39;i1012&#39;)">전체 27회 기록 보기</button></div>
   </div><div class="item-card">
     <div class="item-head">
       <div class="item-name-wrap">
@@ -1284,23 +1334,7 @@
     </div>
     <div class="log-table"><div class="log-thead">
     <span>1차크랙</span><span>배출</span><span>DTR</span><span style="text-align:right">무게/날짜</span>
-  </div><div class="log-row" onclick="openEditLog(&#39;i1013&#39;,&#39;l1780876438708&#39;)">
-      <span class="log-val">184 19:55</span>
-      <span class="log-val">197 23:25</span>
-      <span class="log-dtr">3:30<span class="flag flag-first">1</span></span>
-      <div class="log-meta">
-        <span class="log-weight">58.02kg</span>
-        <span class="log-date">06/07</span>
-      </div>
-    </div><div class="log-row" onclick="openEditLog(&#39;i1013&#39;,&#39;l1780881331638&#39;)">
-      <span class="log-val">184 18:40</span>
-      <span class="log-val">197 22:00</span>
-      <span class="log-dtr">3:20</span>
-      <div class="log-meta">
-        <span class="log-weight">57.92kg</span>
-        <span class="log-date">06/08</span>
-      </div>
-    </div><div class="log-row" onclick="openEditLog(&#39;i1013&#39;,&#39;l1780977831392&#39;)">
+  </div><div class="log-row" onclick="openEditLog(&#39;i1013&#39;,&#39;l1780977831392&#39;)">
       <span class="log-val">184 20:05</span>
       <span class="log-val">197 23:30</span>
       <span class="log-dtr">3:25</span>
@@ -1364,8 +1398,24 @@
         
         <span class="log-date">06/18</span>
       </div>
+    </div><div class="log-row" onclick="openEditLog(&#39;i1013&#39;,&#39;l1781845969316&#39;)">
+      <span class="log-val">184 19:10</span>
+      <span class="log-val">198 22:30</span>
+      <span class="log-dtr">3:20</span>
+      <div class="log-meta">
+        
+        <span class="log-date">06/19</span>
+      </div>
+    </div><div class="memo-row"><span class="memo-icon">✎</span>184 off 198 out</div><div class="log-row" onclick="openEditLog(&#39;i1013&#39;,&#39;l1782084670158&#39;)">
+      <span class="log-val">184 19:20</span>
+      <span class="log-val">198 23:00</span>
+      <span class="log-dtr">3:40<span class="flag flag-first">1</span></span>
+      <div class="log-meta">
+        <span class="log-weight">57.80kg</span>
+        <span class="log-date">06/21</span>
+      </div>
     </div></div>
-    <div class="more-row"><button class="more-btn" onclick="openDetail(&#39;i1013&#39;)">전체 23회 기록 보기</button></div>
+    <div class="more-row"><button class="more-btn" onclick="openDetail(&#39;i1013&#39;)">전체 25회 기록 보기</button></div>
   </div><div class="item-card">
     <div class="item-head">
       <div class="item-name-wrap">
@@ -1380,15 +1430,7 @@
     </div>
     <div class="log-table"><div class="log-thead">
     <span>1차크랙</span><span>배출</span><span>DTR</span><span style="text-align:right">무게/날짜</span>
-  </div><div class="log-row" onclick="openEditLog(&#39;i1014&#39;,&#39;l100171&#39;)">
-      <span class="log-val">182 17:20</span>
-      <span class="log-val">195 21:50</span>
-      <span class="log-dtr">4:30</span>
-      <div class="log-meta">
-        <span class="log-weight">57.26kg</span>
-        <span class="log-date">—</span>
-      </div>
-    </div><div class="log-row" onclick="openEditLog(&#39;i1014&#39;,&#39;l100172&#39;)">
+  </div><div class="log-row" onclick="openEditLog(&#39;i1014&#39;,&#39;l100172&#39;)">
       <span class="log-val">182 16:00</span>
       <span class="log-val">195 20:00</span>
       <span class="log-dtr">4:00</span>
@@ -1460,8 +1502,16 @@
         <span class="log-weight">57.98kg</span>
         <span class="log-date">06/15</span>
       </div>
+    </div><div class="log-row" onclick="openEditLog(&#39;i1014&#39;,&#39;l1782089501622&#39;)">
+      <span class="log-val">182 17:15</span>
+      <span class="log-val">196 20:45</span>
+      <span class="log-dtr">3:30</span>
+      <div class="log-meta">
+        <span class="log-weight">57.84kg</span>
+        <span class="log-date">06/22</span>
+      </div>
     </div></div>
-    <div class="more-row"><button class="more-btn" onclick="openDetail(&#39;i1014&#39;)">전체 17회 기록 보기</button></div>
+    <div class="more-row"><button class="more-btn" onclick="openDetail(&#39;i1014&#39;)">전체 18회 기록 보기</button></div>
   </div><div class="item-card">
     <div class="item-head">
       <div class="item-name-wrap">
@@ -1476,23 +1526,7 @@
     </div>
     <div class="log-table"><div class="log-thead">
     <span>1차크랙</span><span>배출</span><span>DTR</span><span style="text-align:right">무게/날짜</span>
-  </div><div class="log-row" onclick="openEditLog(&#39;i1015&#39;,&#39;l100183&#39;)">
-      <span class="log-val">184 19:10</span>
-      <span class="log-val">200 23:10</span>
-      <span class="log-dtr">4:00</span>
-      <div class="log-meta">
-        
-        <span class="log-date">—</span>
-      </div>
-    </div><div class="log-row" onclick="openEditLog(&#39;i1015&#39;,&#39;l100184&#39;)">
-      <span class="log-val">184 17:50</span>
-      <span class="log-val">199 21:10</span>
-      <span class="log-dtr">3:20</span>
-      <div class="log-meta">
-        
-        <span class="log-date">—</span>
-      </div>
-    </div><div class="log-row" onclick="openEditLog(&#39;i1015&#39;,&#39;l100185&#39;)">
+  </div><div class="log-row" onclick="openEditLog(&#39;i1015&#39;,&#39;l100185&#39;)">
       <span class="log-val">184 17:30</span>
       <span class="log-val">199 21:00</span>
       <span class="log-dtr">3:30</span>
@@ -1556,8 +1590,24 @@
         <span class="log-weight">58.00kg</span>
         <span class="log-date">06/17</span>
       </div>
+    </div><div class="log-row" onclick="openEditLog(&#39;i1015&#39;,&#39;l1781840703886&#39;)">
+      <span class="log-val">184 19:10</span>
+      <span class="log-val">201 23:10</span>
+      <span class="log-dtr">4:00<span class="flag flag-first">1</span></span>
+      <div class="log-meta">
+        <span class="log-weight">57.72kg</span>
+        <span class="log-date">06/19</span>
+      </div>
+    </div><div class="log-row" onclick="openEditLog(&#39;i1015&#39;,&#39;l1782102015341&#39;)">
+      <span class="log-val">184 18:10</span>
+      <span class="log-val">201 22:10</span>
+      <span class="log-dtr">4:00</span>
+      <div class="log-meta">
+        <span class="log-weight">57.50kg</span>
+        <span class="log-date">06/22</span>
+      </div>
     </div></div>
-    <div class="more-row"><button class="more-btn" onclick="openDetail(&#39;i1015&#39;)">전체 14회 기록 보기</button></div>
+    <div class="more-row"><button class="more-btn" onclick="openDetail(&#39;i1015&#39;)">전체 16회 기록 보기</button></div>
   </div><div class="item-card">
     <div class="item-head">
       <div class="item-name-wrap">
@@ -1588,11 +1638,31 @@
   <div class="modal">
     <div class="modal-handle"></div>
     <div class="modal-head">
-      <span class="modal-title" id="modalTitle"></span>
+      <span class="modal-title" id="modalTitle">품목 수정</span>
       <button class="modal-close" onclick="closeModal()">✕</button>
     </div>
-    <div class="modal-body" id="modalBody"></div>
-    <div class="modal-footer" id="modalFooter"></div>
+    <div class="modal-body" id="modalBody">
+    <div class="form-group">
+      <label class="form-label">품목명</label>
+      <input class="form-input" id="fi-name" value="🔴과테말라" autocomplete="off">
+    </div>
+    <div class="form-group">
+      <label class="form-label">블렌드 성분 (선택)</label>
+      <input class="form-input" id="fi-blend" value="" placeholder="예: 브라질 60% 에티오피아 20% 콜롬비아 10%" autocomplete="off">
+    </div>
+    <div class="form-group">
+      <label class="form-label">블렌드 구성비율 (산지 + %, 선택)</label>
+      <div id="bc-list"></div>
+      <button type="button" class="bc-add" onclick="bcAddRow()">＋ 산지 추가</button>
+      <div class="bc-sum" id="bc-sum"></div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">생두투입량 (kg, 선택)</label>
+      <input class="form-input" id="fi-input" type="text" value="70kg" placeholder="예: 60, 1kg, 500g, 250g" autocomplete="off">
+    </div></div>
+    <div class="modal-footer" id="modalFooter">
+    <button class="btn-cancel" onclick="closeModal()">취소</button>
+    <button class="btn-save" onclick="saveItem()">저장</button></div>
   </div>
 </div>
 
@@ -1608,6 +1678,12 @@ let db = null;
 let unsubscribe = null;
 let state = { 'CBOB-120': [], 'CBOB-30': [], 'CBOB-5': [] };
 let curMachine = 'CBOB-120';
+let curView = 'machine';
+let dashSub = 'today';
+function todayKST() {
+  return new Date(Date.now() + 9 * 3600 * 1000).toISOString().slice(0, 10);
+}
+let dashDate = todayKST();
 let editingItemId = null;
 let editingLogId = null;
 let detailItemId = null;
@@ -1698,9 +1774,11 @@ async function dbSaveSettings(machine, vals) {
 
 function render() {
   const el = document.getElementById('content');
-  const allItems = state[curMachine] || [];
   if (!DB_URL) { el.innerHTML = configBanner(); return; }
 
+  if (curView === 'dashboard') { renderDashboard(); return; }
+
+  const allItems = state[curMachine] || [];
   let html = renderSettings();
   if (allItems.length > 0) {
     html += `<div class="search-wrap">
@@ -1898,12 +1976,19 @@ window.openAddItem = function() {
       <input class="form-input" id="fi-blend" placeholder="예: 브라질 60% 에티오피아 20% 콜롬비아 10%" autocomplete="off" />
     </div>
     <div class="form-group">
+      <label class="form-label">블렌드 구성비율 (산지 + %, 선택)</label>
+      <div id="bc-list"></div>
+      <button type="button" class="bc-add" onclick="bcAddRow()">＋ 산지 추가</button>
+      <div class="bc-sum" id="bc-sum"></div>
+    </div>
+    <div class="form-group">
       <label class="form-label">생두투입량 (kg, 선택)</label>
       <input class="form-input" id="fi-input" type="text" placeholder="예: 60, 1kg, 500g, 250g" autocomplete="off" />
     </div>`;
   document.getElementById('modalFooter').innerHTML = `
     <button class="btn-cancel" onclick="closeModal()">취소</button>
     <button class="btn-save" onclick="saveItem()">저장</button>`;
+  bcRender([]);
   showModal();
   setTimeout(() => document.getElementById('fi-name').focus(), 200);
 };
@@ -1922,12 +2007,19 @@ window.openEditItem = function(id) {
       <input class="form-input" id="fi-blend" value="${item.blend || ''}" placeholder="예: 브라질 60% 에티오피아 20% 콜롬비아 10%" autocomplete="off" />
     </div>
     <div class="form-group">
+      <label class="form-label">블렌드 구성비율 (산지 + %, 선택)</label>
+      <div id="bc-list"></div>
+      <button type="button" class="bc-add" onclick="bcAddRow()">＋ 산지 추가</button>
+      <div class="bc-sum" id="bc-sum"></div>
+    </div>
+    <div class="form-group">
       <label class="form-label">생두투입량 (kg, 선택)</label>
       <input class="form-input" id="fi-input" type="text" value="${item.input || ''}" placeholder="예: 60, 1kg, 500g, 250g" autocomplete="off" />
     </div>`;
   document.getElementById('modalFooter').innerHTML = `
     <button class="btn-cancel" onclick="closeModal()">취소</button>
     <button class="btn-save" onclick="saveItem()">저장</button>`;
+  bcRender(Array.isArray(item.blendComp) ? item.blendComp : []);
   showModal();
 };
 
@@ -1935,19 +2027,59 @@ window.saveItem = async function() {
   const name = document.getElementById('fi-name').value.trim();
   const blend = document.getElementById('fi-blend').value.trim();
   const input = document.getElementById('fi-input').value.trim();
+  const blendComp = bcCollect();
   if (!name) return;
   if (editingItemId) {
     const item = findItem(editingItemId);
     item.name = name;
     item.blend = blend;
     item.input = input;
+    item.blendComp = blendComp;
     await dbSave(curMachine, item);
   } else {
-    const newItem = { id: 'i' + Date.now(), name, blend, input, logs: {} };
+    const newItem = { id: 'i' + Date.now(), name, blend, input, blendComp, logs: {} };
     await dbSave(curMachine, newItem);
   }
   closeModal();
 };
+
+const ORIGIN_COLORS = ['#BA7517','#639922','#378ADD','#993C1D','#534AB7','#1D9E75','#D4537E','#854F0B','#0F6E56','#A32D2D'];
+function originColor(i) { return ORIGIN_COLORS[i % ORIGIN_COLORS.length]; }
+
+let bcData = [];
+function bcRender(arr) {
+  bcData = (arr && arr.length) ? arr.map(x => ({ origin: x.origin || '', pct: x.pct != null ? x.pct : '' })) : [];
+  bcPaint();
+}
+function bcPaint() {
+  const list = document.getElementById('bc-list');
+  if (!list) return;
+  list.innerHTML = bcData.map((c, i) => `
+    <div class="bc-row">
+      <input class="form-input" placeholder="산지 (예: 브라질)" value="${c.origin}" oninput="bcSet(${i},'origin',this.value)" autocomplete="off" />
+      <input class="form-input" type="number" placeholder="%" value="${c.pct}" oninput="bcSet(${i},'pct',this.value)" />
+      <button type="button" class="bc-del" onclick="bcRemove(${i})">✕</button>
+    </div>`).join('');
+  bcSum();
+}
+window.bcAddRow = function() { bcData.push({ origin: '', pct: '' }); bcPaint(); };
+window.bcRemove = function(i) { bcData.splice(i, 1); bcPaint(); };
+window.bcSet = function(i, k, v) { if (bcData[i]) bcData[i][k] = v; bcSum(); };
+function bcSum() {
+  const el = document.getElementById('bc-sum');
+  if (!el) return;
+  const rows = bcData.filter(c => c.origin && c.pct !== '' && c.pct != null);
+  if (!rows.length) { el.textContent = ''; el.className = 'bc-sum'; return; }
+  const total = rows.reduce((s, c) => s + (parseFloat(c.pct) || 0), 0);
+  const barEl = rows.map((c, i) => `<div class="bc-seg" style="width:${Math.max(0, parseFloat(c.pct) || 0)}%;background:${originColor(i)}">${c.origin} ${c.pct}</div>`).join('');
+  el.innerHTML = `합계 ${Math.round(total * 10) / 10}%${total === 100 ? ' ✓' : ' (100%가 되도록 조정하세요)'}<div class="bc-bar">${barEl}</div>`;
+  el.className = 'bc-sum ' + (total === 100 ? 'ok' : 'bad');
+}
+function bcCollect() {
+  return bcData
+    .map(c => ({ origin: (c.origin || '').trim(), pct: parseFloat(c.pct) }))
+    .filter(c => c.origin && !isNaN(c.pct) && c.pct > 0);
+}
 
 window.confirmDeleteItem = function(id) {
   const item = findItem(id);
@@ -1974,7 +2106,7 @@ function logFormHtml(l = {}) {
   return `
     <div class="form-group">
       <label class="form-label">날짜</label>
-      <input type="date" class="form-input" id="fl-date" value="${l.date || new Date().toISOString().slice(0, 10)}" />
+      <input type="date" class="form-input" id="fl-date" value="${l.date || todayKST()}" />
     </div>
     <div class="form-group">
       <label class="form-label">1차 크랙</label>
@@ -2150,11 +2282,183 @@ function findItem(id) {
   }
 }
 
-window.switchMachine = function(el) {
-  curMachine = el.dataset.m;
-  searchQuery = '';
+function parseInputKg(raw) {
+  if (!raw) return 0;
+  const s = String(raw).trim();
+  const m = s.match(/([\d.]+)\s*(kg|g)?/i);
+  if (!m) return 0;
+  let v = parseFloat(m[1]);
+  if (isNaN(v)) return 0;
+  const unit = (m[2] || 'kg').toLowerCase();
+  return unit === 'g' ? v / 1000 : v;
+}
+
+function allItemsFlat() {
+  const out = [];
+  ['CBOB-120','CBOB-30','CBOB-5'].forEach(m => {
+    (state[m] || []).forEach(it => out.push({ machine: m, item: it }));
+  });
+  return out;
+}
+
+function logsByDate(targetDate) {
+  const result = [];
+  allItemsFlat().forEach(({ machine, item }) => {
+    const logs = item.logs ? Object.entries(item.logs).map(([id, v]) => ({ id, ...v })) : [];
+    const dayLogs = logs.filter(l => l.date === targetDate);
+    if (dayLogs.length) result.push({ machine, item, count: dayLogs.length, logs: dayLogs });
+  });
+  return result;
+}
+
+function renderDashboard() {
+  const el = document.getElementById('content');
+  const subTabs = `<div class="dash-sub">
+    <div class="dsub ${dashSub==='today'?'on':''}" onclick="setDashSub('today')">현황</div>
+    <div class="dsub ${dashSub==='date'?'on':''}" onclick="setDashSub('date')">날짜조회</div>
+    <div class="dsub ${dashSub==='origin'?'on':''}" onclick="setDashSub('origin')">산지별</div>
+    <div class="dsub ${dashSub==='blend'?'on':''}" onclick="setDashSub('blend')">블렌드</div>
+  </div>`;
+  let body = '';
+  if (dashSub === 'today') body = dashToday();
+  else if (dashSub === 'date') body = dashDateView();
+  else if (dashSub === 'origin') body = dashOrigin();
+  else if (dashSub === 'blend') body = dashBlend();
+  el.innerHTML = subTabs + body;
+}
+
+window.setDashSub = function(s) { dashSub = s; renderDashboard(); };
+
+function dashDayCards(rows) {
+  if (!rows.length) return '<div class="empty">해당 날짜에 기록된 로스팅이 없습니다</div>';
+  return rows.map(({ machine, item, count, logs }) => {
+    const inp = item.input ? `<span class="d-cmeta">${/[a-zA-Z]/.test(item.input) ? item.input : item.input + 'kg'}</span>` : '';
+    const weights = (logs || []).map(l => l.weight).filter(w => w !== undefined && w !== null && String(w).trim() !== '');
+    const wHtml = weights.length ? `<div class="d-cwt">완료무게 ${weights.map(w => w + 'kg').join(', ')}</div>` : '';
+    return `<div class="d-card">
+      <div class="d-crow"><span class="d-cname">${item.name}<span class="d-mtag">${machine}</span></span>${inp}</div>
+      <div class="d-cnt">${count}배치 완료</div>
+      ${wHtml}
+    </div>`;
+  }).join('');
+}
+
+function dashToday() {
+  const today = todayKST();
+  const rows = logsByDate(today);
+  const batchCount = rows.reduce((s, r) => s + r.count, 0);
+  let totalKg = 0;
+  rows.forEach(r => { totalKg += parseInputKg(r.item.input) * r.count; });
+  const head = `<div class="d-mcards">
+    <div class="d-mc"><div class="d-mc-l">완료 배치</div><div class="d-mc-v">${batchCount}건</div></div>
+    <div class="d-mc"><div class="d-mc-l">총 생두</div><div class="d-mc-v">${Math.round(totalKg * 10) / 10}kg</div></div>
+  </div>`;
+  const dlabel = `<div style="font-size:11px;color:var(--text3);font-family:var(--mono);margin-bottom:8px">${today} 오늘</div>`;
+  return head + dlabel + dashDayCards(rows);
+}
+
+function dashDateView() {
+  const rows = logsByDate(dashDate);
+  const bar = `<div class="d-date-bar">
+    <i class="ti ti-calendar" style="color:var(--text3)"></i>
+    <input type="date" id="dashDateInput" value="${dashDate}" onchange="setDashDate(this.value)" />
+  </div>`;
+  const batchCount = rows.reduce((s, r) => s + r.count, 0);
+  let totalKg = 0;
+  rows.forEach(r => { totalKg += parseInputKg(r.item.input) * r.count; });
+  const head = `<div class="d-mcards">
+    <div class="d-mc"><div class="d-mc-l">완료 배치</div><div class="d-mc-v">${batchCount}건</div></div>
+    <div class="d-mc"><div class="d-mc-l">총 생두</div><div class="d-mc-v">${Math.round(totalKg * 10) / 10}kg</div></div>
+  </div>`;
+  return bar + head + dashDayCards(rows);
+}
+
+window.setDashDate = function(v) { dashDate = v; renderDashboard(); };
+
+function originUsage(period) {
+  const now = new Date(todayKST() + 'T00:00:00');
+  let from = null;
+  if (period === 'week') { from = new Date(now); from.setDate(now.getDate() - 7); }
+  else if (period === 'month') { from = new Date(now); from.setMonth(now.getMonth() - 1); }
+  const usage = {};
+  allItemsFlat().forEach(({ item }) => {
+    const logs = item.logs ? Object.values(item.logs) : [];
+    const kgEach = parseInputKg(item.input);
+    if (!kgEach) return;
+    logs.forEach(l => {
+      if (!l.date) return;
+      if (from) { const d = new Date(l.date + 'T00:00:00'); if (d < from) return; }
+      const totalForBatch = kgEach;
+      if (Array.isArray(item.blendComp) && item.blendComp.length) {
+        item.blendComp.forEach(c => {
+          const kg = totalForBatch * (c.pct / 100);
+          usage[c.origin] = (usage[c.origin] || 0) + kg;
+        });
+      } else {
+        const origin = item.name.replace(/^[^\uAC00-\uD7A3a-zA-Z]+/, '').trim();
+        usage[origin] = (usage[origin] || 0) + totalForBatch;
+      }
+    });
+  });
+  return Object.entries(usage).map(([origin, kg]) => ({ origin, kg })).sort((a, b) => b.kg - a.kg);
+}
+
+let originPeriod = 'month';
+function dashOrigin() {
+  const data = originUsage(originPeriod);
+  const toggle = `<div class="d-seg-toggle">
+    <button class="d-seg-btn ${originPeriod==='week'?'on':''}" onclick="setOriginPeriod('week')">주별 (최근7일)</button>
+    <button class="d-seg-btn ${originPeriod==='month'?'on':''}" onclick="setOriginPeriod('month')">월별 (최근30일)</button>
+  </div>`;
+  if (!data.length) {
+    return toggle + '<div class="empty">집계할 데이터가 없습니다.<br>날짜와 생두투입량이 입력된 배치만 집계됩니다.</div>';
+  }
+  const max = data[0].kg || 1;
+  const bars = data.map((d, i) => `<div class="d-bar-item">
+    <div class="d-bar-top"><span class="d-bar-name">${d.origin}</span><span class="d-bar-val">${Math.round(d.kg * 10) / 10}kg</span></div>
+    <div class="d-bar-track"><div class="d-bar-fill" style="width:${Math.max(2, (d.kg / max) * 100)}%;background:${originColor(i)}"></div></div>
+  </div>`).join('');
+  return toggle + bars;
+}
+window.setOriginPeriod = function(p) { originPeriod = p; renderDashboard(); };
+
+function dashBlend() {
+  const blends = [];
+  allItemsFlat().forEach(({ machine, item }) => {
+    if (Array.isArray(item.blendComp) && item.blendComp.length) {
+      blends.push({ machine, item });
+    }
+  });
+  if (!blends.length) {
+    return '<div class="empty">구성비율이 입력된 블렌드가 없습니다.<br>품목 수정에서 블렌드 구성비율을 입력해주세요.</div>';
+  }
+  return blends.map(({ machine, item }) => {
+    const comp = item.blendComp;
+    const total = comp.reduce((s, c) => s + c.pct, 0) || 100;
+    const kgEach = parseInputKg(item.input);
+    const seg = comp.map((c, i) => `<div class="bc-seg" style="width:${(c.pct / total) * 100}%;background:${originColor(i)}">${c.pct}%</div>`).join('');
+    const lg = comp.map((c, i) => {
+      const kg = kgEach ? ` ${Math.round(kgEach * (c.pct / 100) * 100) / 100}kg` : '';
+      return `<span><span class="d-dot" style="background:${originColor(i)}"></span>${c.origin} ${c.pct}%${kg}</span>`;
+    }).join('');
+    return `<div class="d-blend-item">
+      <div class="d-blend-name">${item.name}<span class="d-mtag">${machine}${kgEach ? ' · ' + (Math.round(kgEach*10)/10) + 'kg' : ''}</span></div>
+      <div class="bc-bar">${seg}</div>
+      <div class="d-lg">${lg}</div>
+    </div>`;
+  }).join('');
+}
+
+window.switchTab = function(el) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   el.classList.add('active');
+  searchQuery = '';
+  if (el.dataset.view === 'dashboard') {
+    curView = 'dashboard';
+  } else {
+    curView = 'machine';
+    curMachine = el.dataset.m;
+  }
   render();
 };
 
