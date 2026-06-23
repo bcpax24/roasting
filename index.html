@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0067)file:///C:/Users/%EB%B0%95%EB%B2%94%EC%B0%BD/Downloads/index_5.html -->
+<!-- saved from url=(0068)file:///C:/Users/%EB%B0%95%EB%B2%94%EC%B0%BD/Downloads/index_12.html -->
 <html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -260,10 +260,19 @@
   .d-mc-l { font-size: 11px; color: var(--text2); }
   .d-mc-v { font-size: 20px; font-weight: 500; margin-top: 2px; }
   .d-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 11px 13px; margin-bottom: 8px; }
+  .d-card-b { display: flex; gap: 10px; align-items: flex-start; }
+  .d-cbody { flex: 1; min-width: 0; }
+  .d-numbadge { flex-shrink: 0; min-width: 38px; height: 38px; border-radius: 8px; background: #FAEEDA; color: #854F0B; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: var(--mono); line-height: 1.1; }
+  .d-nap { font-size: 9px; }
+  .d-nn { font-size: 16px; font-weight: 500; }
   .d-crow { display: flex; justify-content: space-between; align-items: center; }
   .d-cname { font-size: 14px; font-weight: 500; }
   .d-cmeta { font-size: 11px; color: var(--accent2); font-family: var(--mono); }
+  .d-ctime { font-size: 11px; color: var(--accent); font-family: var(--mono); font-weight: 500; white-space: nowrap; }
   .d-cnt { font-size: 11px; color: var(--text3); font-family: var(--mono); margin-top: 3px; }
+  .d-cin { font-size: 11px; color: var(--text2); font-family: var(--mono); margin-top: 4px; }
+  .d-cline { font-size: 11px; color: var(--text2); font-family: var(--mono); margin-top: 4px; }
+  .d-loss { font-size: 10px; color: var(--red); font-weight: 500; margin-left: 6px; }
   .d-cwt { font-size: 11px; color: var(--green); font-family: var(--mono); font-weight: 500; margin-top: 2px; }
   .d-mtag { font-size: 10px; color: var(--text3); font-family: var(--mono); margin-left: 6px; }
   .d-date-bar { display: flex; gap: 8px; align-items: center; background: var(--surface2); border-radius: 8px; padding: 4px 10px; margin-bottom: 14px; }
@@ -307,16 +316,50 @@
     <div class="dsub " onclick="setDashSub(&#39;origin&#39;)">산지별</div>
     <div class="dsub " onclick="setDashSub(&#39;blend&#39;)">블렌드</div>
   </div><div class="d-mcards">
-    <div class="d-mc"><div class="d-mc-l">완료 배치</div><div class="d-mc-v">3건</div></div>
-    <div class="d-mc"><div class="d-mc-l">생두 투입량</div><div class="d-mc-v">210kg</div></div>
+    <div class="d-mc"><div class="d-mc-l">완료 배치</div><div class="d-mc-v">7건</div></div>
+    <div class="d-mc"><div class="d-mc-l">생두 투입량</div><div class="d-mc-v">490kg</div></div>
   </div><div style="font-size:11px;color:var(--text3);font-family:var(--mono);margin-bottom:8px">2026-06-23 오늘</div><div class="d-card">
-      <div class="d-crow"><span class="d-cname">🔴베이스블렌드<span class="d-mtag">CBOB-120</span></span><span class="d-cmeta">70kg</span></div>
-      <div class="d-cnt">2배치 완료</div>
       
+      <div class="d-cbody">
+        <div class="d-crow"><span class="d-cname">🔴온두라스<span class="d-mtag">CBOB-120</span></span></div>
+        <div class="d-cline">투입 70kg</div>
+      </div>
     </div><div class="d-card">
-      <div class="d-crow"><span class="d-cname">🔴베트남<span class="d-mtag">CBOB-120</span></span><span class="d-cmeta">70kg</span></div>
-      <div class="d-cnt">1배치 완료</div>
-      <div class="d-cwt">완료무게 58.08kg</div>
+      
+      <div class="d-cbody">
+        <div class="d-crow"><span class="d-cname">🔴데일리<span class="d-mtag">CBOB-120</span></span></div>
+        <div class="d-cline">투입 70kg · 배출 58.08kg<span class="d-loss">감량률 17%</span></div>
+      </div>
+    </div><div class="d-card">
+      
+      <div class="d-cbody">
+        <div class="d-crow"><span class="d-cname">🔴베트남<span class="d-mtag">CBOB-120</span></span></div>
+        <div class="d-cline">투입 70kg · 배출 58.12kg<span class="d-loss">감량률 17%</span></div>
+      </div>
+    </div><div class="d-card">
+      
+      <div class="d-cbody">
+        <div class="d-crow"><span class="d-cname">🔴브라질<span class="d-mtag">CBOB-120</span></span></div>
+        <div class="d-cline">투입 70kg</div>
+      </div>
+    </div><div class="d-card">
+      
+      <div class="d-cbody">
+        <div class="d-crow"><span class="d-cname">🔴베이스블렌드<span class="d-mtag">CBOB-120</span></span></div>
+        <div class="d-cline">투입 70kg</div>
+      </div>
+    </div><div class="d-card">
+      
+      <div class="d-cbody">
+        <div class="d-crow"><span class="d-cname">🔴베이스블렌드<span class="d-mtag">CBOB-120</span></span></div>
+        <div class="d-cline">투입 70kg</div>
+      </div>
+    </div><div class="d-card">
+      
+      <div class="d-cbody">
+        <div class="d-crow"><span class="d-cname">🔴베트남<span class="d-mtag">CBOB-120</span></span></div>
+        <div class="d-cline">투입 70kg · 배출 58.08kg<span class="d-loss">감량률 17%</span></div>
+      </div>
     </div></div>
 
 <div class="modal-bg" id="modalBg" onclick="bgClose(event)">
@@ -343,10 +386,20 @@ let db = null;
 let unsubscribe = null;
 let state = { 'CBOB-120': [], 'CBOB-30': [], 'CBOB-5': [] };
 let curMachine = 'CBOB-120';
-let curView = 'machine';
+let curView = 'dashboard';
 let dashSub = 'today';
 function todayKST() {
   return new Date(Date.now() + 9 * 3600 * 1000).toISOString().slice(0, 10);
+}
+function nowTimeKST() {
+  return new Date(Date.now() + 9 * 3600 * 1000).toISOString().slice(11, 16);
+}
+function fmtAmPm(hhmm) {
+  if (!hhmm || !/^\d{1,2}:\d{2}$/.test(hhmm)) return '';
+  const [h, m] = hhmm.split(':').map(Number);
+  const ap = h < 12 ? '오전' : '오후';
+  let h12 = h % 12; if (h12 === 0) h12 = 12;
+  return `${ap} ${h12}:${String(m).padStart(2, '0')}`;
 }
 let dashDate = todayKST();
 let editingItemId = null;
@@ -916,8 +969,15 @@ window.openEditLog = function(itemId, logId) {
 
 window.saveLog = async function() {
   const data = getLogFormData();
-  const logId = editingLogId || ('l' + Date.now());
-  await set(ref(db, `profiles/${curMachine}/${editingItemId}/logs/${logId}`), data);
+  if (editingLogId) {
+    const existing = (findItem(editingItemId)?.logs || {})[editingLogId] || {};
+    if (existing.time) data.time = existing.time;
+    await set(ref(db, `profiles/${curMachine}/${editingItemId}/logs/${editingLogId}`), data);
+  } else {
+    data.time = nowTimeKST();
+    const logId = 'l' + Date.now();
+    await set(ref(db, `profiles/${curMachine}/${editingItemId}/logs/${logId}`), data);
+  }
   closeModal();
 };
 
@@ -984,14 +1044,27 @@ function allItemsFlat() {
   return out;
 }
 
-function logsByDate(targetDate) {
+function batchesByDate(targetDate) {
   const result = [];
   allItemsFlat().forEach(({ machine, item }) => {
     const logs = item.logs ? Object.entries(item.logs).map(([id, v]) => ({ id, ...v })) : [];
-    const dayLogs = logs.filter(l => l.date === targetDate);
-    if (dayLogs.length) result.push({ machine, item, count: dayLogs.length, logs: dayLogs });
+    logs.forEach(l => {
+      if (l.date === targetDate) result.push({ machine, item, log: l, id: l.id });
+    });
   });
   return result;
+}
+
+function sortBatches(list, ascending) {
+  return list.slice().sort((a, b) => {
+    const ta = a.log.time || '', tb = b.log.time || '';
+    if (ta !== tb) {
+      if (!ta) return ascending ? -1 : 1;
+      if (!tb) return ascending ? 1 : -1;
+      return ascending ? (ta < tb ? -1 : 1) : (tb < ta ? -1 : 1);
+    }
+    return ascending ? (a.id < b.id ? -1 : 1) : (b.id < a.id ? -1 : 1);
+  });
 }
 
 function renderDashboard() {
@@ -1012,48 +1085,76 @@ function renderDashboard() {
 
 window.setDashSub = function(s) { dashSub = s; renderDashboard(); };
 
-function dashDayCards(rows) {
-  if (!rows.length) return '<div class="empty">해당 날짜에 기록된 로스팅이 없습니다</div>';
-  return rows.map(({ machine, item, count, logs }) => {
-    const inp = item.input ? `<span class="d-cmeta">${/[a-zA-Z]/.test(item.input) ? item.input : item.input + 'kg'}</span>` : '';
-    const weights = (logs || []).map(l => l.weight).filter(w => w !== undefined && w !== null && String(w).trim() !== '');
-    const wHtml = weights.length ? `<div class="d-cwt">완료무게 ${weights.map(w => w + 'kg').join(', ')}</div>` : '';
-    return `<div class="d-card">
-      <div class="d-crow"><span class="d-cname">${item.name}<span class="d-mtag">${machine}</span></span>${inp}</div>
-      <div class="d-cnt">${count}배치 완료</div>
-      ${wHtml}
+function assignAmPmNumbers(list) {
+  const withTime = list.filter(b => b.log.time && /^\d{1,2}:\d{2}$/.test(b.log.time));
+  const amSorted = withTime.filter(b => Number(b.log.time.split(':')[0]) < 12)
+    .sort((a, b) => a.log.time < b.log.time ? -1 : 1);
+  const pmSorted = withTime.filter(b => Number(b.log.time.split(':')[0]) >= 12)
+    .sort((a, b) => a.log.time < b.log.time ? -1 : 1);
+  const labels = {};
+  amSorted.forEach((b, i) => { labels[b.id] = { ap: '오전', n: i + 1 }; });
+  pmSorted.forEach((b, i) => { labels[b.id] = { ap: '오후', n: i + 1 }; });
+  return labels;
+}
+
+function dashBatchCards(list, labels) {
+  if (!list.length) return '<div class="empty">해당 날짜에 기록된 로스팅이 없습니다</div>';
+  return list.map(({ machine, item, log, id }) => {
+    const tm = log.time ? `<span class="d-ctime">${fmtAmPm(log.time)}</span>` : '';
+    const inpRaw = item.input ? (/[a-zA-Z]/.test(item.input) ? item.input : item.input + 'kg') : '';
+    const hasW = (log.weight !== undefined && log.weight !== null && String(log.weight).trim() !== '');
+    const parts = [];
+    if (inpRaw) parts.push(`투입 ${inpRaw}`);
+    let lossHtml = '';
+    if (hasW) {
+      parts.push(`배출 ${log.weight}kg`);
+      const inKg = parseInputKg(item.input);
+      const outKg = parseInputKg(log.weight);
+      if (inKg > 0 && outKg > 0) {
+        const pct = (inKg - outKg) / inKg * 100;
+        lossHtml = `<span class="d-loss">감량률 ${Math.round(pct * 10) / 10}%</span>`;
+      }
+    }
+    const line = parts.length ? `<div class="d-cline">${parts.join(' · ')}${lossHtml}</div>` : '';
+    const lb = labels && labels[id];
+    const badge = lb ? `<div class="d-numbadge"><span class="d-nap">${lb.ap}</span><span class="d-nn">${lb.n}</span></div>` : '';
+    return `<div class="d-card${badge ? ' d-card-b' : ''}">
+      ${badge}
+      <div class="d-cbody">
+        <div class="d-crow"><span class="d-cname">${item.name}<span class="d-mtag">${machine}</span></span>${tm}</div>
+        ${line}
+      </div>
     </div>`;
   }).join('');
 }
 
-function dashToday() {
-  const today = todayKST();
-  const rows = logsByDate(today);
-  const batchCount = rows.reduce((s, r) => s + r.count, 0);
+function dashSummaryHead(list) {
+  const batchCount = list.length;
   let totalKg = 0;
-  rows.forEach(r => { totalKg += parseInputKg(r.item.input) * r.count; });
-  const head = `<div class="d-mcards">
+  list.forEach(r => { totalKg += parseInputKg(r.item.input); });
+  return `<div class="d-mcards">
     <div class="d-mc"><div class="d-mc-l">완료 배치</div><div class="d-mc-v">${batchCount}건</div></div>
     <div class="d-mc"><div class="d-mc-l">생두 투입량</div><div class="d-mc-v">${Math.round(totalKg * 10) / 10}kg</div></div>
   </div>`;
+}
+
+function dashToday() {
+  const today = todayKST();
+  const list = sortBatches(batchesByDate(today), false);
+  const labels = assignAmPmNumbers(list);
+  const head = dashSummaryHead(list);
   const dlabel = `<div style="font-size:11px;color:var(--text3);font-family:var(--mono);margin-bottom:8px">${today} 오늘</div>`;
-  return head + dlabel + dashDayCards(rows);
+  return head + dlabel + dashBatchCards(list, labels);
 }
 
 function dashDateView() {
-  const rows = logsByDate(dashDate);
+  const list = sortBatches(batchesByDate(dashDate), true);
   const bar = `<div class="d-date-bar">
     <i class="ti ti-calendar" style="color:var(--text3)"></i>
     <input type="date" id="dashDateInput" value="${dashDate}" onchange="setDashDate(this.value)" />
   </div>`;
-  const batchCount = rows.reduce((s, r) => s + r.count, 0);
-  let totalKg = 0;
-  rows.forEach(r => { totalKg += parseInputKg(r.item.input) * r.count; });
-  const head = `<div class="d-mcards">
-    <div class="d-mc"><div class="d-mc-l">완료 배치</div><div class="d-mc-v">${batchCount}건</div></div>
-    <div class="d-mc"><div class="d-mc-l">생두 투입량</div><div class="d-mc-v">${Math.round(totalKg * 10) / 10}kg</div></div>
-  </div>`;
-  return bar + head + dashDayCards(rows);
+  const head = dashSummaryHead(list);
+  return bar + head + dashBatchCards(list);
 }
 
 window.setDashDate = function(v) { dashDate = v; renderDashboard(); };
@@ -1086,7 +1187,7 @@ function originUsage(period) {
   return Object.entries(usage).map(([origin, kg]) => ({ origin, kg })).sort((a, b) => b.kg - a.kg);
 }
 
-let originPeriod = 'month';
+let originPeriod = 'week';
 function dashOrigin() {
   const data = originUsage(originPeriod);
   const toggle = `<div class="d-seg-toggle">
