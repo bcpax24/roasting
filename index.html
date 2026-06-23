@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0068)file:///C:/Users/%EB%B0%95%EB%B2%94%EC%B0%BD/Downloads/index_13.html -->
+<!-- saved from url=(0068)file:///C:/Users/%EB%B0%95%EB%B2%94%EC%B0%BD/Downloads/index_16.html -->
 <html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -272,7 +272,8 @@
   .d-cnt { font-size: 11px; color: var(--text3); font-family: var(--mono); margin-top: 3px; }
   .d-cin { font-size: 11px; color: var(--text2); font-family: var(--mono); margin-top: 4px; }
   .d-cline { font-size: 11px; color: var(--text2); font-family: var(--mono); margin-top: 4px; }
-  .d-loss { font-size: 10px; color: var(--red); font-weight: 500; margin-left: 6px; }
+  .d-out { color: var(--green); }
+  .d-loss { color: var(--red); }
   .d-cwt { font-size: 11px; color: var(--green); font-family: var(--mono); font-weight: 500; margin-top: 2px; }
   .d-mtag { font-size: 10px; color: var(--text3); font-family: var(--mono); margin-left: 6px; }
   .d-date-bar { display: flex; gap: 8px; align-items: center; background: var(--surface2); border-radius: 8px; padding: 4px 10px; margin-bottom: 14px; }
@@ -296,7 +297,7 @@
 <body>
 
 <div class="header">
-  <div class="logo">원당커피공장<span> / 로스팅 프로파일</span></div>
+  <div class="logo">ULL<span> / 로스팅 프로파일</span></div>
   <div class="header-right">
     <div class="sync-dot ok" id="syncDot"></div>
     <span class="sync-label" id="syncLabel">동기화됨</span>
@@ -330,6 +331,102 @@
       <input class="search-input" id="searchInput" placeholder="품목 검색" oninput="onSearch(this.value)">
       <button class="search-clear" id="searchClear" onclick="clearSearch()">✕</button>
     </div><div id="itemList"><div class="item-card">
+    <div class="item-head">
+      <div class="item-name-wrap">
+        <span class="item-name">🔴베이스블렌드<span class="item-input">70kg</span></span>
+        <div class="item-blend">브라질 9 : 콜롬비아 1</div>
+      </div>
+      <div class="item-btns">
+        <button class="icon-btn" onclick="openAddLog(&#39;i1000&#39;)" title="배치 추가">＋</button>
+        <button class="icon-btn" onclick="openEditItem(&#39;i1000&#39;)" title="수정">✎</button>
+        <button class="icon-btn" onclick="confirmDeleteItem(&#39;i1000&#39;)" title="삭제">✕</button>
+      </div>
+    </div>
+    <div class="log-table"><div class="log-thead">
+    <span>1차크랙</span><span>배출</span><span>DTR</span><span style="text-align:right">무게/날짜</span>
+  </div><div class="log-row" onclick="openEditLog(&#39;i1000&#39;,&#39;l1781829006415&#39;)">
+      <span class="log-val">182 16:25</span>
+      <span class="log-val">197 20:00</span>
+      <span class="log-dtr">3:35<span class="flag flag-d">D</span></span>
+      <div class="log-meta">
+        
+        <span class="log-date">06/19</span>
+      </div>
+    </div><div class="memo-row"><span class="memo-icon">✎</span>198배출 변경</div><div class="log-row" onclick="openEditLog(&#39;i1000&#39;,&#39;l1781830668658&#39;)">
+      <span class="log-val">182 16:40</span>
+      <span class="log-val">198 20:25</span>
+      <span class="log-dtr">3:45<span class="flag flag-d">D</span></span>
+      <div class="log-meta">
+        
+        <span class="log-date">06/19</span>
+      </div>
+    </div><div class="log-row" onclick="openEditLog(&#39;i1000&#39;,&#39;l1781833941267&#39;)">
+      <span class="log-val">183 16:40</span>
+      <span class="log-val">198 20:10</span>
+      <span class="log-dtr">3:30<span class="flag flag-r">R</span></span>
+      <div class="log-meta">
+        
+        <span class="log-date">06/19</span>
+      </div>
+    </div><div class="memo-row"><span class="memo-icon">✎</span>183 off 198 out</div><div class="log-row" onclick="openEditLog(&#39;i1000&#39;,&#39;l1782086353092&#39;)">
+      <span class="log-val">183 17:20</span>
+      <span class="log-val">198 21:00</span>
+      <span class="log-dtr">3:40<span class="flag flag-d">D</span></span>
+      <div class="log-meta">
+        
+        <span class="log-date">06/19</span>
+      </div>
+    </div><div class="log-row" onclick="openEditLog(&#39;i1000&#39;,&#39;l1782091182304&#39;)">
+      <span class="log-val">183 17:10</span>
+      <span class="log-val">198 20:40</span>
+      <span class="log-dtr">3:30<span class="flag flag-d">D</span></span>
+      <div class="log-meta">
+        
+        <span class="log-date">06/22</span>
+      </div>
+    </div><div class="log-row" onclick="openEditLog(&#39;i1000&#39;,&#39;l1782100260399&#39;)">
+      <span class="log-val">183 18:40</span>
+      <span class="log-val">198 22:25</span>
+      <span class="log-dtr">3:45<span class="flag flag-r">R</span></span>
+      <div class="log-meta">
+        
+        <span class="log-date">06/22</span>
+      </div>
+    </div><div class="log-row" onclick="openEditLog(&#39;i1000&#39;,&#39;l1782176444552&#39;)">
+      <span class="log-val">183 18:45</span>
+      <span class="log-val">198 22:20</span>
+      <span class="log-dtr">3:35</span>
+      <div class="log-meta">
+        
+        <span class="log-date">06/23</span>
+      </div>
+    </div><div class="log-row" onclick="openEditLog(&#39;i1000&#39;,&#39;l1782178035213&#39;)">
+      <span class="log-val">183 17:40</span>
+      <span class="log-val">198 21:10</span>
+      <span class="log-dtr">3:30</span>
+      <div class="log-meta">
+        
+        <span class="log-date">06/23</span>
+      </div>
+    </div><div class="log-row" onclick="openEditLog(&#39;i1000&#39;,&#39;l1782193695291&#39;)">
+      <span class="log-val">—</span>
+      <span class="log-val">—</span>
+      <span class="log-dtr">—</span>
+      <div class="log-meta">
+        
+        <span class="log-date">06/23</span>
+      </div>
+    </div><div class="log-row" onclick="openEditLog(&#39;i1000&#39;,&#39;l1782194134841&#39;)">
+      <span class="log-val">183 17:00</span>
+      <span class="log-val">198 20:20</span>
+      <span class="log-dtr">3:20</span>
+      <div class="log-meta">
+        
+        <span class="log-date">06/23</span>
+      </div>
+    </div></div>
+    <div class="more-row"><button class="more-btn" onclick="openDetail(&#39;i1000&#39;)">전체 57회 기록 보기</button></div>
+  </div><div class="item-card">
     <div class="item-head">
       <div class="item-name-wrap">
         <span class="item-name">🔴온두라스<span class="item-input">70kg</span></span>
@@ -420,7 +517,7 @@
       <span class="log-val">189 19:55</span>
       <span class="log-dtr">1:50</span>
       <div class="log-meta">
-        
+        <span class="log-weight">58.94kg</span>
         <span class="log-date">06/23</span>
       </div>
     </div></div>
@@ -713,102 +810,6 @@
       </div>
     </div></div>
     <div class="more-row"><button class="more-btn" onclick="openDetail(&#39;i1005&#39;)">전체 28회 기록 보기</button></div>
-  </div><div class="item-card">
-    <div class="item-head">
-      <div class="item-name-wrap">
-        <span class="item-name">🔴베이스블렌드<span class="item-input">70kg</span></span>
-        <div class="item-blend">브라질 9 : 콜롬비아 1</div>
-      </div>
-      <div class="item-btns">
-        <button class="icon-btn" onclick="openAddLog(&#39;i1000&#39;)" title="배치 추가">＋</button>
-        <button class="icon-btn" onclick="openEditItem(&#39;i1000&#39;)" title="수정">✎</button>
-        <button class="icon-btn" onclick="confirmDeleteItem(&#39;i1000&#39;)" title="삭제">✕</button>
-      </div>
-    </div>
-    <div class="log-table"><div class="log-thead">
-    <span>1차크랙</span><span>배출</span><span>DTR</span><span style="text-align:right">무게/날짜</span>
-  </div><div class="log-row" onclick="openEditLog(&#39;i1000&#39;,&#39;l1781758427259&#39;)">
-      <span class="log-val">182 17:15</span>
-      <span class="log-val">197 21:00</span>
-      <span class="log-dtr">3:45</span>
-      <div class="log-meta">
-        
-        <span class="log-date">06/18</span>
-      </div>
-    </div><div class="log-row" onclick="openEditLog(&#39;i1000&#39;,&#39;l1781760193025&#39;)">
-      <span class="log-val">182 17:10</span>
-      <span class="log-val">197 20:50</span>
-      <span class="log-dtr">3:40</span>
-      <div class="log-meta">
-        
-        <span class="log-date">06/18</span>
-      </div>
-    </div><div class="log-row" onclick="openEditLog(&#39;i1000&#39;,&#39;l1781829006415&#39;)">
-      <span class="log-val">182 16:25</span>
-      <span class="log-val">197 20:00</span>
-      <span class="log-dtr">3:35<span class="flag flag-d">D</span></span>
-      <div class="log-meta">
-        
-        <span class="log-date">06/19</span>
-      </div>
-    </div><div class="memo-row"><span class="memo-icon">✎</span>198배출 변경</div><div class="log-row" onclick="openEditLog(&#39;i1000&#39;,&#39;l1781830668658&#39;)">
-      <span class="log-val">182 16:40</span>
-      <span class="log-val">198 20:25</span>
-      <span class="log-dtr">3:45<span class="flag flag-d">D</span></span>
-      <div class="log-meta">
-        
-        <span class="log-date">06/19</span>
-      </div>
-    </div><div class="log-row" onclick="openEditLog(&#39;i1000&#39;,&#39;l1781833941267&#39;)">
-      <span class="log-val">183 16:40</span>
-      <span class="log-val">198 20:10</span>
-      <span class="log-dtr">3:30<span class="flag flag-r">R</span></span>
-      <div class="log-meta">
-        
-        <span class="log-date">06/19</span>
-      </div>
-    </div><div class="memo-row"><span class="memo-icon">✎</span>183 off 198 out</div><div class="log-row" onclick="openEditLog(&#39;i1000&#39;,&#39;l1782086353092&#39;)">
-      <span class="log-val">183 17:20</span>
-      <span class="log-val">198 21:00</span>
-      <span class="log-dtr">3:40<span class="flag flag-d">D</span></span>
-      <div class="log-meta">
-        
-        <span class="log-date">06/19</span>
-      </div>
-    </div><div class="log-row" onclick="openEditLog(&#39;i1000&#39;,&#39;l1782091182304&#39;)">
-      <span class="log-val">183 17:10</span>
-      <span class="log-val">198 20:40</span>
-      <span class="log-dtr">3:30<span class="flag flag-d">D</span></span>
-      <div class="log-meta">
-        
-        <span class="log-date">06/22</span>
-      </div>
-    </div><div class="log-row" onclick="openEditLog(&#39;i1000&#39;,&#39;l1782100260399&#39;)">
-      <span class="log-val">183 18:40</span>
-      <span class="log-val">198 22:25</span>
-      <span class="log-dtr">3:45<span class="flag flag-r">R</span></span>
-      <div class="log-meta">
-        
-        <span class="log-date">06/22</span>
-      </div>
-    </div><div class="log-row" onclick="openEditLog(&#39;i1000&#39;,&#39;l1782176444552&#39;)">
-      <span class="log-val">183 18:45</span>
-      <span class="log-val">198 22:20</span>
-      <span class="log-dtr">3:35</span>
-      <div class="log-meta">
-        
-        <span class="log-date">06/23</span>
-      </div>
-    </div><div class="log-row" onclick="openEditLog(&#39;i1000&#39;,&#39;l1782178035213&#39;)">
-      <span class="log-val">183 17:40</span>
-      <span class="log-val">198 21:10</span>
-      <span class="log-dtr">3:30</span>
-      <div class="log-meta">
-        
-        <span class="log-date">06/23</span>
-      </div>
-    </div></div>
-    <div class="more-row"><button class="more-btn" onclick="openDetail(&#39;i1000&#39;)">전체 55회 기록 보기</button></div>
   </div><div class="item-card">
     <div class="item-head">
       <div class="item-name-wrap">
@@ -2386,17 +2387,16 @@ function dashBatchCards(list, labels) {
     const hasW = (log.weight !== undefined && log.weight !== null && String(log.weight).trim() !== '');
     const parts = [];
     if (inpRaw) parts.push(`투입 ${inpRaw}`);
-    let lossHtml = '';
     if (hasW) {
-      parts.push(`배출 ${log.weight}kg`);
+      parts.push(`<span class="d-out">배출 ${log.weight}kg</span>`);
       const inKg = parseInputKg(item.input);
       const outKg = parseInputKg(log.weight);
       if (inKg > 0 && outKg > 0) {
         const pct = (inKg - outKg) / inKg * 100;
-        lossHtml = `<span class="d-loss">감량률 ${Math.round(pct * 10) / 10}%</span>`;
+        parts.push(`<span class="d-loss">감량률 ${Math.round(pct * 10) / 10}%</span>`);
       }
     }
-    const line = parts.length ? `<div class="d-cline">${parts.join(' · ')}${lossHtml}</div>` : '';
+    const line = parts.length ? `<div class="d-cline">${parts.join(' · ')}</div>` : '';
     const lb = labels && labels[id];
     const badge = lb ? `<div class="d-numbadge"><span class="d-nap">${lb.ap}</span><span class="d-nn">${lb.n}</span></div>` : '';
     return `<div class="d-card${badge ? ' d-card-b' : ''}">
